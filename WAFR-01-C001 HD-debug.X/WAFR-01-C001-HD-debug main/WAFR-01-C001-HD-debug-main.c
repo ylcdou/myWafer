@@ -229,7 +229,7 @@
         {
           flagChargeBat = 1;    
             // sure the USB has plugged in
-          adcValue = GetAdcChargBatValue( AD_BAT_OK_CHANNEL );
+           adcValue = GetAdcChargBatValue( AD_BAT_OK_CHANNEL );
           if ( adcValue > 800 )
           {
               // it OK to charge the battery
@@ -239,7 +239,7 @@
 
           }else
           {
-                adcValue = GetAdcChargBatValue( AD_BAT_OK_CHANNEL );
+              adcValue = GetAdcBatValue( AD_BAT_CHANNEL );
 
                 turnOffAllLed();   // clear the trail of history display
                 if ( adcValue > 996)   // 4.01 V
@@ -258,6 +258,7 @@
                     Led_MediumGreen = OFF;
                     Led_HighRed = OFF;
                     Led_HighGreen = OFF;
+                    delay_ms(200);
                     
                 }else if ( adcValue > 891 )
                 {
@@ -270,6 +271,7 @@
                         Led_LowGreen = OFF;
                         Led_MediumRed = OFF;
                         Led_MediumGreen = OFF;
+                        delay_ms(200);
                 }else if ( adcValue > 816) 
                         {
                           Led_LowRed = ON;
@@ -277,6 +279,7 @@
                           delay_ms(200);
                           Led_LowRed = OFF;
                           Led_LowGreen = OFF;
+                          delay_ms(200);
                         } else
                         {
                           Led_LowRed = ON;

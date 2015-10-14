@@ -3907,7 +3907,7 @@ void delay_s(unsigned int x) ;
 void delay_ms(unsigned int x) ;
 void delay_10us(void);
 
-# 36 "WAFR-01-C001 HD-debug.X/WAFR-01-C001-HD-debug main/WAFR-01-C001-HD-debug-main.c"
+# 40 "WAFR-01-C001 HD-debug.X/WAFR-01-C001-HD-debug main/WAFR-01-C001-HD-debug-main.c"
 int main(int argc, char** argv)
 {
 unsigned int i;
@@ -3927,14 +3927,14 @@ InitializePinmux();
 
 PORTBbits.RB2 = 1;
 
-# 62
+# 66
 InitializeInterrupts();
 
 InitializeTimer0();
 
 InitializeINT0();
 
-# 70
+# 74
 InitializeAD();
 
 turnOffAllLed();
@@ -3942,7 +3942,7 @@ turnOffAllLed();
 
 PORTBbits.RB1 = 0 ;
 
-# 81
+# 85
 while ( !PORTBbits.RB0 )
 {
 PORTCbits.RC0 = ! PORTCbits.RC0 ;
@@ -3954,7 +3954,7 @@ PORTCbits.RC0 = 0 ;
 
 timeSystemRun = 0 ;
 
-# 96
+# 100
 for ( i = 0 ; i < 10 ; i++)
 {
 adcBatValue[i] = 816 ;
@@ -4009,7 +4009,7 @@ break;
 }
 }
 
-# 154
+# 158
 levelTmpSetting = ReadEEprom( 0 );
 if ( (levelTmpSetting > 3) | (levelTmpSetting == 0 ) )
 {
@@ -4017,7 +4017,7 @@ levelTmpSetting = 1 ;
 
 }
 
-# 188
+# 192
 while(1)
 {
 if ( !flagChargeBat )
@@ -4039,7 +4039,7 @@ break;
 default: break;
 }
 
-# 216
+# 220
 if ( timerHalfSecond >= 1 )
 {
 LevelTmpSetShow();
@@ -4052,16 +4052,17 @@ if ( PORTAbits.RA4 )
 {
 flagChargeBat = 1;
 
-adcValue = GetAdcChargBatValue( PORTAbits.RA1 );
+adcValue = GetAdcChargBatValue( 1 );
 if ( adcValue > 800 )
 {
 
-PORTCbits.RC0 = 1 ;
-PORTCbits.RC1 = 1 ;
-PORTCbits.RC2 = 1 ;
+PORTCbits.RC1 = 1;
+PORTCbits.RC4 = 1;
+PORTCbits.RC7 = 1;
+
 }else
 {
-adcValue = GetAdcChargBatValue( 4 );
+adcValue = GetAdcChargBatValue( 1 );
 
 turnOffAllLed();
 if ( adcValue > 996)
@@ -4109,8 +4110,6 @@ PORTCbits.RC1 = 0;
 delay_ms(100);
 }
 }
-
-
 } else
 {
 flagChargeBat = 0 ;

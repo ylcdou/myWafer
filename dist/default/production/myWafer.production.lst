@@ -1,7 +1,7 @@
 
 
 Microchip Technology PIC18 LITE Macro Assembler V1.35 build -356382666 
-                                                                                               Wed Oct 14 15:40:53 2015
+                                                                                               Wed Oct 14 17:03:08 2015
 
 Microchip Technology Omniscient Code Generator v1.35 (Free mode) build 201507080246
      1                           	processor	18F2420
@@ -40,29 +40,29 @@ Microchip Technology Omniscient Code Generator v1.35 (Free mode) build 201507080
     34                           	psect	intsave_regs,global,class=BIGRAM,space=1,delta=1
     35                           	psect	rparam,global,class=COMRAM,space=1,delta=1
     36                           	psect	temp,global,ovrld,common,class=COMRAM,space=1,delta=1
-    37  0000                     _PORTAbits	set	3968
-    38  0000                     _PORTBbits	set	3969
-    39  0000                     _PORTC	set	3970
-    40  0000                     _PORTCbits	set	3970
-    41  0000                     _TRISAbits	set	3986
-    42  0000                     _TRISBbits	set	3987
-    43  0000                     _TRISCbits	set	3988
-    44  0000                     _ADCON0	set	4034
-    45  0000                     _ADCON0bits	set	4034
-    46  0000                     _ADCON1bits	set	4033
-    47  0000                     _ADCON2bits	set	4032
-    48  0000                     _ADRESH	set	4036
-    49  0000                     _ADRESL	set	4035
-    50  0000                     _EEADR	set	4009
-    51  0000                     _EECON1bits	set	4006
-    52  0000                     _EECON2	set	4007
-    53  0000                     _EEDATA	set	4008
-    54  0000                     _PIR1bits	set	3998
-    55  0000                     _T0CONbits	set	4053
-    56  0000                     _TMR0H	set	4055
-    57  0000                     _TMR0L	set	4054
-    58  0000                     _INTCON2bits	set	4081
-    59  0000                     _INTCONbits	set	4082
+    37  0000                     _ADCON0	set	4034
+    38  0000                     _ADCON0bits	set	4034
+    39  0000                     _ADCON1bits	set	4033
+    40  0000                     _ADCON2bits	set	4032
+    41  0000                     _ADRESH	set	4036
+    42  0000                     _ADRESL	set	4035
+    43  0000                     _EEADR	set	4009
+    44  0000                     _EECON1bits	set	4006
+    45  0000                     _EECON2	set	4007
+    46  0000                     _EEDATA	set	4008
+    47  0000                     _INTCON2bits	set	4081
+    48  0000                     _INTCONbits	set	4082
+    49  0000                     _PIR1bits	set	3998
+    50  0000                     _PORTAbits	set	3968
+    51  0000                     _PORTBbits	set	3969
+    52  0000                     _PORTC	set	3970
+    53  0000                     _PORTCbits	set	3970
+    54  0000                     _T0CONbits	set	4053
+    55  0000                     _TMR0H	set	4055
+    56  0000                     _TMR0L	set	4054
+    57  0000                     _TRISAbits	set	3986
+    58  0000                     _TRISBbits	set	3987
+    59  0000                     _TRISCbits	set	3988
     60                           
     61                           ; #config settings
     62  0000                     
@@ -334,7 +334,7 @@ Microchip Technology Omniscient Code Generator v1.35 (Free mode) build 201507080
    328 ;;
    329 ;; *************** function _main *****************
    330 ;; Defined at:
-   331 ;;		line 36 in file "WAFR-01-C001 HD-debug.X/WAFR-01-C001-HD-debug main/WAFR-01-C001-HD-debug-main.c"
+   331 ;;		line 40 in file "WAFR-01-C001 HD-debug.X/WAFR-01-C001-HD-debug main/WAFR-01-C001-HD-debug-main.c"
    332 ;; Parameters:    Size  Location     Type
    333 ;;  argc            2   50[COMRAM] int 
    334 ;;  argv            3   52[COMRAM] PTR PTR unsigned char 
@@ -386,10 +386,10 @@ Microchip Technology Omniscient Code Generator v1.35 (Free mode) build 201507080
    380  00001A                     _main:
    381                           	opt stack 26
    382                           
-   383                           ;WAFR-01-C001-HD-debug-main.c: 38: unsigned int i;
-   384                           ;WAFR-01-C001-HD-debug-main.c: 39: int8 keyValue;
-   385                           ;WAFR-01-C001-HD-debug-main.c: 43: int16 adcValue;
-   386                           ;WAFR-01-C001-HD-debug-main.c: 45: uint32 countHeatTime = 0 ;
+   383                           ;WAFR-01-C001-HD-debug-main.c: 42: unsigned int i;
+   384                           ;WAFR-01-C001-HD-debug-main.c: 43: int8 keyValue;
+   385                           ;WAFR-01-C001-HD-debug-main.c: 47: int16 adcValue;
+   386                           ;WAFR-01-C001-HD-debug-main.c: 49: uint32 countHeatTime = 0 ;
    387                           
    388                           ;incstack = 0
    389  00001A  0E00               	movlw	0
@@ -402,45 +402,45 @@ Microchip Technology Omniscient Code Generator v1.35 (Free mode) build 201507080
    396  000028  0E00               	movlw	0
    397  00002A  6FAB               	movwf	(main@countHeatTime+3)& (0+255),b
    398                           
-   399                           ;WAFR-01-C001-HD-debug-main.c: 46: uint8 flagChargeBat = 0 ;
+   399                           ;WAFR-01-C001-HD-debug-main.c: 50: uint8 flagChargeBat = 0 ;
    400  00002C  0E00               	movlw	0
    401  00002E  0100               	movlb	0	; () banked
    402  000030  6FAC               	movwf	main@flagChargeBat& (0+255),b
    403                           
    404                           ; BSR set to: 0
-   405                           ;WAFR-01-C001-HD-debug-main.c: 49: InitializeOscillator();
+   405                           ;WAFR-01-C001-HD-debug-main.c: 53: InitializeOscillator();
    406  000032  EC09  F006         	call	_InitializeOscillator	;wreg free
    407                           
-   408                           ;WAFR-01-C001-HD-debug-main.c: 51: InitializePinmux();
+   408                           ;WAFR-01-C001-HD-debug-main.c: 55: InitializePinmux();
    409  000036  ECA2  F005         	call	_InitializePinmux	;wreg free
    410                           
-   411                           ;WAFR-01-C001-HD-debug-main.c: 53: PORTBbits.RB2 = 1;
+   411                           ;WAFR-01-C001-HD-debug-main.c: 57: PORTBbits.RB2 = 1;
    412  00003A  8481               	bsf	3969,2,c	;volatile
    413                           
-   414                           ;WAFR-01-C001-HD-debug-main.c: 62: InitializeInterrupts();
+   414                           ;WAFR-01-C001-HD-debug-main.c: 66: InitializeInterrupts();
    415  00003C  EC01  F006         	call	_InitializeInterrupts	;wreg free
    416                           
-   417                           ;WAFR-01-C001-HD-debug-main.c: 64: InitializeTimer0();
+   417                           ;WAFR-01-C001-HD-debug-main.c: 68: InitializeTimer0();
    418  000040  ECE6  F005         	call	_InitializeTimer0	;wreg free
    419                           
-   420                           ;WAFR-01-C001-HD-debug-main.c: 66: InitializeINT0();
+   420                           ;WAFR-01-C001-HD-debug-main.c: 70: InitializeINT0();
    421  000044  EC05  F006         	call	_InitializeINT0	;wreg free
    422                           
-   423                           ;WAFR-01-C001-HD-debug-main.c: 70: InitializeAD();
+   423                           ;WAFR-01-C001-HD-debug-main.c: 74: InitializeAD();
    424  000048  ECC9  F005         	call	_InitializeAD	;wreg free
    425                           
-   426                           ;WAFR-01-C001-HD-debug-main.c: 72: turnOffAllLed();
+   426                           ;WAFR-01-C001-HD-debug-main.c: 76: turnOffAllLed();
    427  00004C  ECFD  F005         	call	_turnOffAllLed	;wreg free
    428                           
-   429                           ;WAFR-01-C001-HD-debug-main.c: 75: PORTBbits.RB1 = 0 ;
+   429                           ;WAFR-01-C001-HD-debug-main.c: 79: PORTBbits.RB1 = 0 ;
    430  000050  9281               	bcf	3969,1,c	;volatile
    431                           
-   432                           ;WAFR-01-C001-HD-debug-main.c: 81: while ( !PORTBbits.RB0 )
+   432                           ;WAFR-01-C001-HD-debug-main.c: 85: while ( !PORTBbits.RB0 )
    433  000052  D01E               	goto	l2614
    434  000054                     l2610:
    435                           
-   436                           ;WAFR-01-C001-HD-debug-main.c: 82: {
-   437                           ;WAFR-01-C001-HD-debug-main.c: 83: PORTCbits.RC0 = ! PORTCbits.RC0 ;
+   436                           ;WAFR-01-C001-HD-debug-main.c: 86: {
+   437                           ;WAFR-01-C001-HD-debug-main.c: 87: PORTCbits.RC0 = ! PORTCbits.RC0 ;
    438  000054  B082               	btfsc	3970,0,c	;volatile
    439  000056  D003               	goto	u2080
    440  000058  6A38               	clrf	??_main& (0+255),c
@@ -455,7 +455,7 @@ Microchip Technology Omniscient Code Generator v1.35 (Free mode) build 201507080
    449  000066  1838               	xorwf	??_main,w,c
    450  000068  6E82               	movwf	3970,c	;volatile
    451                           
-   452                           ;WAFR-01-C001-HD-debug-main.c: 84: PORTCbits.RC2 = ! PORTCbits.RC2;
+   452                           ;WAFR-01-C001-HD-debug-main.c: 88: PORTCbits.RC2 = ! PORTCbits.RC2;
    453  00006A  B482               	btfsc	3970,2,c	;volatile
    454  00006C  D003               	goto	u2100
    455  00006E  6A38               	clrf	??_main& (0+255),c
@@ -472,7 +472,7 @@ Microchip Technology Omniscient Code Generator v1.35 (Free mode) build 201507080
    466  000080  1838               	xorwf	??_main,w,c
    467  000082  6E82               	movwf	3970,c	;volatile
    468                           
-   469                           ;WAFR-01-C001-HD-debug-main.c: 85: delay_ms(80);
+   469                           ;WAFR-01-C001-HD-debug-main.c: 89: delay_ms(80);
    470  000084  0E00               	movlw	0
    471  000086  6E18               	movwf	delay_ms@x+1,c
    472  000088  0E50               	movlw	80
@@ -482,11 +482,11 @@ Microchip Technology Omniscient Code Generator v1.35 (Free mode) build 201507080
    476  000090  A081               	btfss	3969,0,c	;volatile
    477  000092  D7E0               	goto	l2610
    478                           
-   479                           ;WAFR-01-C001-HD-debug-main.c: 86: }
-   480                           ;WAFR-01-C001-HD-debug-main.c: 87: PORTCbits.RC0 = 0 ;
+   479                           ;WAFR-01-C001-HD-debug-main.c: 90: }
+   480                           ;WAFR-01-C001-HD-debug-main.c: 91: PORTCbits.RC0 = 0 ;
    481  000094  9082               	bcf	3970,0,c	;volatile
    482                           
-   483                           ;WAFR-01-C001-HD-debug-main.c: 90: timeSystemRun = 0 ;
+   483                           ;WAFR-01-C001-HD-debug-main.c: 94: timeSystemRun = 0 ;
    484  000096  0E00               	movlw	0
    485  000098  6E59               	movwf	_timeSystemRun,c
    486  00009A  0E00               	movlw	0
@@ -496,7 +496,7 @@ Microchip Technology Omniscient Code Generator v1.35 (Free mode) build 201507080
    490  0000A2  0E00               	movlw	0
    491  0000A4  6E5C               	movwf	_timeSystemRun+3,c
    492                           
-   493                           ;WAFR-01-C001-HD-debug-main.c: 96: for ( i = 0 ; i < 10 ; i++)
+   493                           ;WAFR-01-C001-HD-debug-main.c: 100: for ( i = 0 ; i < 10 ; i++)
    494  0000A6  0E00               	movlw	0
    495  0000A8  0100               	movlb	0	; () banked
    496  0000AA  6FAF               	movwf	(main@i+1)& (0+255),b
@@ -515,8 +515,8 @@ Microchip Technology Omniscient Code Generator v1.35 (Free mode) build 201507080
    509  0000BE  D022               	goto	l2628
    510                           
    511                           ; BSR set to: 0
-   512                           ;WAFR-01-C001-HD-debug-main.c: 97: {
-   513                           ;WAFR-01-C001-HD-debug-main.c: 98: adcBatValue[i] = 816 ;
+   512                           ;WAFR-01-C001-HD-debug-main.c: 101: {
+   513                           ;WAFR-01-C001-HD-debug-main.c: 102: adcBatValue[i] = 816 ;
    514                           
    515                           ; BSR set to: 0
    516                           
@@ -537,7 +537,7 @@ Microchip Technology Omniscient Code Generator v1.35 (Free mode) build 201507080
    531  0000DA  0E03               	movlw	3
    532  0000DC  6EDD               	movwf	postdec2,c
    533                           
-   534                           ;WAFR-01-C001-HD-debug-main.c: 99: adcAD597Value[i] = 0 ;
+   534                           ;WAFR-01-C001-HD-debug-main.c: 103: adcAD597Value[i] = 0 ;
    535  0000DE  90D8               	bcf	status,0,c
    536  0000E0  0100               	movlb	0	; () banked
    537  0000E2  35AE               	rlcf	main@i& (0+255),w,b
@@ -562,8 +562,8 @@ Microchip Technology Omniscient Code Generator v1.35 (Free mode) build 201507080
    556  000104                     l2628:
    557                           
    558                           ; BSR set to: 0
-   559                           ;WAFR-01-C001-HD-debug-main.c: 100: }
-   560                           ;WAFR-01-C001-HD-debug-main.c: 103: buttonPushTimeStart = 0 ;
+   559                           ;WAFR-01-C001-HD-debug-main.c: 104: }
+   560                           ;WAFR-01-C001-HD-debug-main.c: 107: buttonPushTimeStart = 0 ;
    561  000104  0E00               	movlw	0
    562  000106  6E4D               	movwf	_buttonPushTimeStart,c
    563  000108  0E00               	movlw	0
@@ -573,7 +573,7 @@ Microchip Technology Omniscient Code Generator v1.35 (Free mode) build 201507080
    567  000110  0E00               	movlw	0
    568  000112  6E50               	movwf	_buttonPushTimeStart+3,c
    569                           
-   570                           ;WAFR-01-C001-HD-debug-main.c: 104: buttonPushTimeStop = 0 ;
+   570                           ;WAFR-01-C001-HD-debug-main.c: 108: buttonPushTimeStop = 0 ;
    571  000114  0E00               	movlw	0
    572  000116  6E51               	movwf	_buttonPushTimeStop,c
    573  000118  0E00               	movlw	0
@@ -583,22 +583,22 @@ Microchip Technology Omniscient Code Generator v1.35 (Free mode) build 201507080
    577  000120  0E00               	movlw	0
    578  000122  6E54               	movwf	_buttonPushTimeStop+3,c
    579                           
-   580                           ;WAFR-01-C001-HD-debug-main.c: 109: while(timeSystemRun < 10 * 100)
+   580                           ;WAFR-01-C001-HD-debug-main.c: 113: while(timeSystemRun < 10 * 100)
    581  000124  D052               	goto	l2656
    582  000126                     l2630:
    583                           
    584                           ; BSR set to: 0
-   585                           ;WAFR-01-C001-HD-debug-main.c: 110: {
-   586                           ;WAFR-01-C001-HD-debug-main.c: 111: adcValue = GetAdcBatValue( 4 );
+   585                           ;WAFR-01-C001-HD-debug-main.c: 114: {
+   586                           ;WAFR-01-C001-HD-debug-main.c: 115: adcValue = GetAdcBatValue( 4 );
    587  000126  0E04               	movlw	4
    588  000128  ECEA  F003         	call	_GetAdcBatValue
    589  00012C  C020  F0B0         	movff	?_GetAdcBatValue,main@adcValue
    590  000130  C021  F0B1         	movff	?_GetAdcBatValue+1,main@adcValue+1
    591                           
-   592                           ;WAFR-01-C001-HD-debug-main.c: 113: turnOffAllLed();
+   592                           ;WAFR-01-C001-HD-debug-main.c: 117: turnOffAllLed();
    593  000134  ECFD  F005         	call	_turnOffAllLed	;wreg free
    594                           
-   595                           ;WAFR-01-C001-HD-debug-main.c: 114: if ( adcValue > 996)
+   595                           ;WAFR-01-C001-HD-debug-main.c: 118: if ( adcValue > 996)
    596  000138  0100               	movlb	0	; () banked
    597  00013A  BFB1               	btfsc	(main@adcValue+1)& (0+255),7,b
    598  00013C  D00F               	goto	l2638
@@ -612,26 +612,26 @@ Microchip Technology Omniscient Code Generator v1.35 (Free mode) build 201507080
    606  00014C  D007               	goto	l2638
    607                           
    608                           ; BSR set to: 0
-   609                           ;WAFR-01-C001-HD-debug-main.c: 115: {
-   610                           ;WAFR-01-C001-HD-debug-main.c: 117: PORTCbits.RC0 = 1;
+   609                           ;WAFR-01-C001-HD-debug-main.c: 119: {
+   610                           ;WAFR-01-C001-HD-debug-main.c: 121: PORTCbits.RC0 = 1;
    611  00014E  8082               	bsf	3970,0,c	;volatile
    612                           
-   613                           ;WAFR-01-C001-HD-debug-main.c: 118: PORTCbits.RC1 = 1;
+   613                           ;WAFR-01-C001-HD-debug-main.c: 122: PORTCbits.RC1 = 1;
    614  000150  8282               	bsf	3970,1,c	;volatile
    615                           
-   616                           ;WAFR-01-C001-HD-debug-main.c: 119: PORTCbits.RC3 = 1;
+   616                           ;WAFR-01-C001-HD-debug-main.c: 123: PORTCbits.RC3 = 1;
    617  000152  8682               	bsf	3970,3,c	;volatile
    618                           
-   619                           ;WAFR-01-C001-HD-debug-main.c: 120: PORTCbits.RC4 = 1;
+   619                           ;WAFR-01-C001-HD-debug-main.c: 124: PORTCbits.RC4 = 1;
    620  000154  8882               	bsf	3970,4,c	;volatile
    621                           
-   622                           ;WAFR-01-C001-HD-debug-main.c: 121: PORTCbits.RC6 = 1;
+   622                           ;WAFR-01-C001-HD-debug-main.c: 125: PORTCbits.RC6 = 1;
    623  000156  8C82               	bsf	3970,6,c	;volatile
    624                           
-   625                           ;WAFR-01-C001-HD-debug-main.c: 122: PORTCbits.RC7 = 1;
+   625                           ;WAFR-01-C001-HD-debug-main.c: 126: PORTCbits.RC7 = 1;
    626  000158  8E82               	bsf	3970,7,c	;volatile
    627                           
-   628                           ;WAFR-01-C001-HD-debug-main.c: 123: }else if ( adcValue > 891 )
+   628                           ;WAFR-01-C001-HD-debug-main.c: 127: }else if ( adcValue > 891 )
    629  00015A  D02E               	goto	l71
    630  00015C                     l2638:
    631                           
@@ -649,20 +649,20 @@ Microchip Technology Omniscient Code Generator v1.35 (Free mode) build 201507080
    643  000170  D005               	goto	l2642
    644                           
    645                           ; BSR set to: 0
-   646                           ;WAFR-01-C001-HD-debug-main.c: 124: {
-   647                           ;WAFR-01-C001-HD-debug-main.c: 125: PORTCbits.RC0 = 1;
+   646                           ;WAFR-01-C001-HD-debug-main.c: 128: {
+   647                           ;WAFR-01-C001-HD-debug-main.c: 129: PORTCbits.RC0 = 1;
    648  000172  8082               	bsf	3970,0,c	;volatile
    649                           
-   650                           ;WAFR-01-C001-HD-debug-main.c: 126: PORTCbits.RC1 = 1;
+   650                           ;WAFR-01-C001-HD-debug-main.c: 130: PORTCbits.RC1 = 1;
    651  000174  8282               	bsf	3970,1,c	;volatile
    652                           
-   653                           ;WAFR-01-C001-HD-debug-main.c: 127: PORTCbits.RC3 = 1;
+   653                           ;WAFR-01-C001-HD-debug-main.c: 131: PORTCbits.RC3 = 1;
    654  000176  8682               	bsf	3970,3,c	;volatile
    655                           
-   656                           ;WAFR-01-C001-HD-debug-main.c: 128: PORTCbits.RC4 = 1;
+   656                           ;WAFR-01-C001-HD-debug-main.c: 132: PORTCbits.RC4 = 1;
    657  000178  8882               	bsf	3970,4,c	;volatile
    658                           
-   659                           ;WAFR-01-C001-HD-debug-main.c: 129: }else if ( adcValue > 816)
+   659                           ;WAFR-01-C001-HD-debug-main.c: 133: }else if ( adcValue > 816)
    660  00017A  D01E               	goto	l71
    661  00017C                     l2642:
    662                           
@@ -680,40 +680,40 @@ Microchip Technology Omniscient Code Generator v1.35 (Free mode) build 201507080
    674  000190  D003               	goto	l74
    675                           
    676                           ; BSR set to: 0
-   677                           ;WAFR-01-C001-HD-debug-main.c: 130: {
-   678                           ;WAFR-01-C001-HD-debug-main.c: 131: PORTCbits.RC0 = 1;
+   677                           ;WAFR-01-C001-HD-debug-main.c: 134: {
+   678                           ;WAFR-01-C001-HD-debug-main.c: 135: PORTCbits.RC0 = 1;
    679  000192  8082               	bsf	3970,0,c	;volatile
    680                           
-   681                           ;WAFR-01-C001-HD-debug-main.c: 132: PORTCbits.RC1 = 1;
+   681                           ;WAFR-01-C001-HD-debug-main.c: 136: PORTCbits.RC1 = 1;
    682  000194  8282               	bsf	3970,1,c	;volatile
    683                           
-   684                           ;WAFR-01-C001-HD-debug-main.c: 133: } else
+   684                           ;WAFR-01-C001-HD-debug-main.c: 137: } else
    685  000196  D010               	goto	l71
    686  000198                     l74:
    687                           
    688                           ; BSR set to: 0
-   689                           ;WAFR-01-C001-HD-debug-main.c: 134: {
-   690                           ;WAFR-01-C001-HD-debug-main.c: 135: PORTCbits.RC0 = 1;
+   689                           ;WAFR-01-C001-HD-debug-main.c: 138: {
+   690                           ;WAFR-01-C001-HD-debug-main.c: 139: PORTCbits.RC0 = 1;
    691  000198  8082               	bsf	3970,0,c	;volatile
    692                           
-   693                           ;WAFR-01-C001-HD-debug-main.c: 136: PORTCbits.RC1 = 1;
+   693                           ;WAFR-01-C001-HD-debug-main.c: 140: PORTCbits.RC1 = 1;
    694  00019A  8282               	bsf	3970,1,c	;volatile
    695                           
    696                           ; BSR set to: 0
-   697                           ;WAFR-01-C001-HD-debug-main.c: 137: delay_ms(100);
+   697                           ;WAFR-01-C001-HD-debug-main.c: 141: delay_ms(100);
    698  00019C  0E00               	movlw	0
    699  00019E  6E18               	movwf	delay_ms@x+1,c
    700  0001A0  0E64               	movlw	100
    701  0001A2  6E17               	movwf	delay_ms@x,c
    702  0001A4  EC73  F005         	call	_delay_ms	;wreg free
    703                           
-   704                           ;WAFR-01-C001-HD-debug-main.c: 138: PORTCbits.RC0 = 0;
+   704                           ;WAFR-01-C001-HD-debug-main.c: 142: PORTCbits.RC0 = 0;
    705  0001A8  9082               	bcf	3970,0,c	;volatile
    706                           
-   707                           ;WAFR-01-C001-HD-debug-main.c: 139: PORTCbits.RC1 = 0;
+   707                           ;WAFR-01-C001-HD-debug-main.c: 143: PORTCbits.RC1 = 0;
    708  0001AA  9282               	bcf	3970,1,c	;volatile
    709                           
-   710                           ;WAFR-01-C001-HD-debug-main.c: 140: delay_ms(100);
+   710                           ;WAFR-01-C001-HD-debug-main.c: 144: delay_ms(100);
    711  0001AC  0E00               	movlw	0
    712  0001AE  6E18               	movwf	delay_ms@x+1,c
    713  0001B0  0E64               	movlw	100
@@ -721,14 +721,14 @@ Microchip Technology Omniscient Code Generator v1.35 (Free mode) build 201507080
    715  0001B4  EC73  F005         	call	_delay_ms	;wreg free
    716  0001B8                     l71:
    717                           
-   718                           ;WAFR-01-C001-HD-debug-main.c: 141: }
-   719                           ;WAFR-01-C001-HD-debug-main.c: 143: keyValue = ProcessButton();
+   718                           ;WAFR-01-C001-HD-debug-main.c: 145: }
+   719                           ;WAFR-01-C001-HD-debug-main.c: 147: keyValue = ProcessButton();
    720  0001B8  EC33  F003         	call	_ProcessButton	;wreg free
    721  0001BC  0100               	movlb	0	; () banked
    722  0001BE  6FAD               	movwf	main@keyValue& (0+255),b
    723                           
    724                           ; BSR set to: 0
-   725                           ;WAFR-01-C001-HD-debug-main.c: 144: if ( keyValue != 0 )
+   725                           ;WAFR-01-C001-HD-debug-main.c: 148: if ( keyValue != 0 )
    726  0001C0  0100               	movlb	0	; () banked
    727  0001C2  51AD               	movf	main@keyValue& (0+255),w,b
    728  0001C4  0100               	movlb	0	; () banked
@@ -749,14 +749,14 @@ Microchip Technology Omniscient Code Generator v1.35 (Free mode) build 201507080
    743  0001DC                     l2658:
    744                           
    745                           ; BSR set to: 0
-   746                           ;WAFR-01-C001-HD-debug-main.c: 147: }
-   747                           ;WAFR-01-C001-HD-debug-main.c: 148: }
-   748                           ;WAFR-01-C001-HD-debug-main.c: 154: levelTmpSetting = ReadEEprom( 0 );
+   746                           ;WAFR-01-C001-HD-debug-main.c: 151: }
+   747                           ;WAFR-01-C001-HD-debug-main.c: 152: }
+   748                           ;WAFR-01-C001-HD-debug-main.c: 158: levelTmpSetting = ReadEEprom( 0 );
    749  0001DC  0E00               	movlw	0
    750  0001DE  ECF2  F005         	call	_ReadEEprom
    751  0001E2  6E62               	movwf	_levelTmpSetting,c
    752                           
-   753                           ;WAFR-01-C001-HD-debug-main.c: 155: if ( (levelTmpSetting > 3) | (levelTmpSetting == 0 )
+   753                           ;WAFR-01-C001-HD-debug-main.c: 159: if ( (levelTmpSetting > 3) | (levelTmpSetting == 0 )
       +                           )
    754  0001E4  0E04               	movlw	4
    755  0001E6  6062               	cpfslt	_levelTmpSetting,c
@@ -766,14 +766,14 @@ Microchip Technology Omniscient Code Generator v1.35 (Free mode) build 201507080
    759  0001EE  D002               	goto	l81
    760  0001F0                     l2664:
    761                           
-   762                           ;WAFR-01-C001-HD-debug-main.c: 156: {
-   763                           ;WAFR-01-C001-HD-debug-main.c: 157: levelTmpSetting = 1 ;
+   762                           ;WAFR-01-C001-HD-debug-main.c: 160: {
+   763                           ;WAFR-01-C001-HD-debug-main.c: 161: levelTmpSetting = 1 ;
    764  0001F0  0E01               	movlw	1
    765  0001F2  6E62               	movwf	_levelTmpSetting,c
    766  0001F4                     l81:
    767                           
-   768                           ;WAFR-01-C001-HD-debug-main.c: 189: {
-   769                           ;WAFR-01-C001-HD-debug-main.c: 190: if ( !flagChargeBat )
+   768                           ;WAFR-01-C001-HD-debug-main.c: 193: {
+   769                           ;WAFR-01-C001-HD-debug-main.c: 194: if ( !flagChargeBat )
    770  0001F4  0100               	movlb	0	; () banked
    771  0001F6  51AC               	movf	main@flagChargeBat& (0+255),w,b
    772  0001F8  0100               	movlb	0	; () banked
@@ -781,32 +781,32 @@ Microchip Technology Omniscient Code Generator v1.35 (Free mode) build 201507080
    774  0001FC  D01B               	goto	l2680
    775                           
    776                           ; BSR set to: 0
-   777                           ;WAFR-01-C001-HD-debug-main.c: 191: {
-   778                           ;WAFR-01-C001-HD-debug-main.c: 192: keyValue = ProcessButton();
+   777                           ;WAFR-01-C001-HD-debug-main.c: 195: {
+   778                           ;WAFR-01-C001-HD-debug-main.c: 196: keyValue = ProcessButton();
    779  0001FE  EC33  F003         	call	_ProcessButton	;wreg free
    780  000202  0100               	movlb	0	; () banked
    781  000204  6FAD               	movwf	main@keyValue& (0+255),b
    782                           
-   783                           ;WAFR-01-C001-HD-debug-main.c: 193: switch ( keyValue)
+   783                           ;WAFR-01-C001-HD-debug-main.c: 197: switch ( keyValue)
    784  000206  D006               	goto	l2674
    785  000208                     l2668:
    786                           
    787                           ; BSR set to: 0
-   788                           ;WAFR-01-C001-HD-debug-main.c: 201: ProcessHeat();
+   788                           ;WAFR-01-C001-HD-debug-main.c: 205: ProcessHeat();
    789  000208  ECA1  F001         	call	_ProcessHeat	;wreg free
    790                           
-   791                           ;WAFR-01-C001-HD-debug-main.c: 202: break;
+   791                           ;WAFR-01-C001-HD-debug-main.c: 206: break;
    792  00020C  D00E               	goto	l2676
    793  00020E                     l2670:
    794                           
-   795                           ;WAFR-01-C001-HD-debug-main.c: 204: ShutDownSystem();
+   795                           ;WAFR-01-C001-HD-debug-main.c: 208: ShutDownSystem();
    796  00020E  EC0A  F005         	call	_ShutDownSystem	;wreg free
    797                           
-   798                           ;WAFR-01-C001-HD-debug-main.c: 207: }
+   798                           ;WAFR-01-C001-HD-debug-main.c: 211: }
    799                           
-   800                           ;WAFR-01-C001-HD-debug-main.c: 206: default: break;
+   800                           ;WAFR-01-C001-HD-debug-main.c: 210: default: break;
    801                           
-   802                           ;WAFR-01-C001-HD-debug-main.c: 205: break;
+   802                           ;WAFR-01-C001-HD-debug-main.c: 209: break;
    803  000212  D00B               	goto	l2676
    804  000214                     l2674:
    805  000214  0100               	movlb	0	; () banked
@@ -829,36 +829,36 @@ Microchip Technology Omniscient Code Generator v1.35 (Free mode) build 201507080
    822  000228  D7F2               	goto	l2670
    823  00022A                     l2676:
    824                           
-   825                           ;WAFR-01-C001-HD-debug-main.c: 216: if ( timerHalfSecond >= 1 )
+   825                           ;WAFR-01-C001-HD-debug-main.c: 220: if ( timerHalfSecond >= 1 )
    826  00022A  505D               	movf	_timerHalfSecond,w,c
    827  00022C  105E               	iorwf	_timerHalfSecond+1,w,c
    828  00022E  A4D8               	btfss	status,2,c
    829                           
-   830                           ;WAFR-01-C001-HD-debug-main.c: 217: {
-   831                           ;WAFR-01-C001-HD-debug-main.c: 218: LevelTmpSetShow();
+   830                           ;WAFR-01-C001-HD-debug-main.c: 221: {
+   831                           ;WAFR-01-C001-HD-debug-main.c: 222: LevelTmpSetShow();
    832  000230  EC2D  F005         	call	_LevelTmpSetShow	;wreg free
    833  000234                     l2680:
    834                           
-   835                           ;WAFR-01-C001-HD-debug-main.c: 219: }
-   836                           ;WAFR-01-C001-HD-debug-main.c: 220: }
-   837                           ;WAFR-01-C001-HD-debug-main.c: 224: if ( PORTAbits.RA4 )
+   835                           ;WAFR-01-C001-HD-debug-main.c: 223: }
+   836                           ;WAFR-01-C001-HD-debug-main.c: 224: }
+   837                           ;WAFR-01-C001-HD-debug-main.c: 228: if ( PORTAbits.RA4 )
    838  000234  A880               	btfss	3968,4,c	;volatile
    839  000236  D081               	goto	l2742
    840                           
-   841                           ;WAFR-01-C001-HD-debug-main.c: 225: {
-   842                           ;WAFR-01-C001-HD-debug-main.c: 226: flagChargeBat = 1;
+   841                           ;WAFR-01-C001-HD-debug-main.c: 229: {
+   842                           ;WAFR-01-C001-HD-debug-main.c: 230: flagChargeBat = 1;
    843  000238  0E01               	movlw	1
    844  00023A  0100               	movlb	0	; () banked
    845  00023C  6FAC               	movwf	main@flagChargeBat& (0+255),b
    846                           
    847                           ; BSR set to: 0
-   848                           ;WAFR-01-C001-HD-debug-main.c: 228: adcValue = GetAdcChargBatValue( 1 );
+   848                           ;WAFR-01-C001-HD-debug-main.c: 232: adcValue = GetAdcChargBatValue( 1 );
    849  00023E  0E01               	movlw	1
    850  000240  EC91  F003         	call	_GetAdcChargBatValue
    851  000244  C020  F0B0         	movff	?_GetAdcChargBatValue,main@adcValue
    852  000248  C021  F0B1         	movff	?_GetAdcChargBatValue+1,main@adcValue+1
    853                           
-   854                           ;WAFR-01-C001-HD-debug-main.c: 229: if ( adcValue > 800 )
+   854                           ;WAFR-01-C001-HD-debug-main.c: 233: if ( adcValue > 800 )
    855  00024C  0100               	movlb	0	; () banked
    856  00024E  BFB1               	btfsc	(main@adcValue+1)& (0+255),7,b
    857  000250  D00C               	goto	l2690
@@ -872,32 +872,32 @@ Microchip Technology Omniscient Code Generator v1.35 (Free mode) build 201507080
    865  000260  D004               	goto	l2690
    866                           
    867                           ; BSR set to: 0
-   868                           ;WAFR-01-C001-HD-debug-main.c: 230: {
-   869                           ;WAFR-01-C001-HD-debug-main.c: 232: PORTCbits.RC1 = 1;
+   868                           ;WAFR-01-C001-HD-debug-main.c: 234: {
+   869                           ;WAFR-01-C001-HD-debug-main.c: 236: PORTCbits.RC1 = 1;
    870  000262  8282               	bsf	3970,1,c	;volatile
    871                           
-   872                           ;WAFR-01-C001-HD-debug-main.c: 233: PORTCbits.RC4 = 1;
+   872                           ;WAFR-01-C001-HD-debug-main.c: 237: PORTCbits.RC4 = 1;
    873  000264  8882               	bsf	3970,4,c	;volatile
    874                           
-   875                           ;WAFR-01-C001-HD-debug-main.c: 234: PORTCbits.RC7 = 1;
+   875                           ;WAFR-01-C001-HD-debug-main.c: 238: PORTCbits.RC7 = 1;
    876  000266  8E82               	bsf	3970,7,c	;volatile
    877                           
-   878                           ;WAFR-01-C001-HD-debug-main.c: 236: }else
+   878                           ;WAFR-01-C001-HD-debug-main.c: 240: }else
    879  000268  D7C5               	goto	l81
    880  00026A                     l2690:
    881                           
    882                           ; BSR set to: 0
-   883                           ;WAFR-01-C001-HD-debug-main.c: 237: {
-   884                           ;WAFR-01-C001-HD-debug-main.c: 238: adcValue = GetAdcChargBatValue( 1 );
+   883                           ;WAFR-01-C001-HD-debug-main.c: 241: {
+   884                           ;WAFR-01-C001-HD-debug-main.c: 242: adcValue = GetAdcChargBatValue( 1 );
    885  00026A  0E01               	movlw	1
    886  00026C  EC91  F003         	call	_GetAdcChargBatValue
    887  000270  C020  F0B0         	movff	?_GetAdcChargBatValue,main@adcValue
    888  000274  C021  F0B1         	movff	?_GetAdcChargBatValue+1,main@adcValue+1
    889                           
-   890                           ;WAFR-01-C001-HD-debug-main.c: 240: turnOffAllLed();
+   890                           ;WAFR-01-C001-HD-debug-main.c: 244: turnOffAllLed();
    891  000278  ECFD  F005         	call	_turnOffAllLed	;wreg free
    892                           
-   893                           ;WAFR-01-C001-HD-debug-main.c: 241: if ( adcValue > 996)
+   893                           ;WAFR-01-C001-HD-debug-main.c: 245: if ( adcValue > 996)
    894  00027C  0100               	movlb	0	; () banked
    895  00027E  BFB1               	btfsc	(main@adcValue+1)& (0+255),7,b
    896  000280  D01B               	goto	l2712
@@ -911,52 +911,52 @@ Microchip Technology Omniscient Code Generator v1.35 (Free mode) build 201507080
    904  000290  D013               	goto	l2712
    905                           
    906                           ; BSR set to: 0
-   907                           ;WAFR-01-C001-HD-debug-main.c: 242: {
-   908                           ;WAFR-01-C001-HD-debug-main.c: 244: PORTCbits.RC0 = 1;
+   907                           ;WAFR-01-C001-HD-debug-main.c: 246: {
+   908                           ;WAFR-01-C001-HD-debug-main.c: 248: PORTCbits.RC0 = 1;
    909  000292  8082               	bsf	3970,0,c	;volatile
    910                           
-   911                           ;WAFR-01-C001-HD-debug-main.c: 245: PORTCbits.RC1 = 1;
+   911                           ;WAFR-01-C001-HD-debug-main.c: 249: PORTCbits.RC1 = 1;
    912  000294  8282               	bsf	3970,1,c	;volatile
    913                           
-   914                           ;WAFR-01-C001-HD-debug-main.c: 246: PORTCbits.RC3 = 1;
+   914                           ;WAFR-01-C001-HD-debug-main.c: 250: PORTCbits.RC3 = 1;
    915  000296  8682               	bsf	3970,3,c	;volatile
    916                           
-   917                           ;WAFR-01-C001-HD-debug-main.c: 247: PORTCbits.RC4 = 1;
+   917                           ;WAFR-01-C001-HD-debug-main.c: 251: PORTCbits.RC4 = 1;
    918  000298  8882               	bsf	3970,4,c	;volatile
    919                           
-   920                           ;WAFR-01-C001-HD-debug-main.c: 248: PORTCbits.RC6 = 1;
+   920                           ;WAFR-01-C001-HD-debug-main.c: 252: PORTCbits.RC6 = 1;
    921  00029A  8C82               	bsf	3970,6,c	;volatile
    922                           
-   923                           ;WAFR-01-C001-HD-debug-main.c: 249: PORTCbits.RC7 = 1;
+   923                           ;WAFR-01-C001-HD-debug-main.c: 253: PORTCbits.RC7 = 1;
    924  00029C  8E82               	bsf	3970,7,c	;volatile
    925                           
    926                           ; BSR set to: 0
-   927                           ;WAFR-01-C001-HD-debug-main.c: 250: delay_ms(200);
+   927                           ;WAFR-01-C001-HD-debug-main.c: 254: delay_ms(200);
    928  00029E  0E00               	movlw	0
    929  0002A0  6E18               	movwf	delay_ms@x+1,c
    930  0002A2  0EC8               	movlw	200
    931  0002A4  6E17               	movwf	delay_ms@x,c
    932  0002A6  EC73  F005         	call	_delay_ms	;wreg free
    933                           
-   934                           ;WAFR-01-C001-HD-debug-main.c: 251: PORTCbits.RC0 = 0;
+   934                           ;WAFR-01-C001-HD-debug-main.c: 255: PORTCbits.RC0 = 0;
    935  0002AA  9082               	bcf	3970,0,c	;volatile
    936                           
-   937                           ;WAFR-01-C001-HD-debug-main.c: 252: PORTCbits.RC1 = 0;
+   937                           ;WAFR-01-C001-HD-debug-main.c: 256: PORTCbits.RC1 = 0;
    938  0002AC  9282               	bcf	3970,1,c	;volatile
    939                           
-   940                           ;WAFR-01-C001-HD-debug-main.c: 253: PORTCbits.RC3 = 0;
+   940                           ;WAFR-01-C001-HD-debug-main.c: 257: PORTCbits.RC3 = 0;
    941  0002AE  9682               	bcf	3970,3,c	;volatile
    942                           
-   943                           ;WAFR-01-C001-HD-debug-main.c: 254: PORTCbits.RC4 = 0;
+   943                           ;WAFR-01-C001-HD-debug-main.c: 258: PORTCbits.RC4 = 0;
    944  0002B0  9882               	bcf	3970,4,c	;volatile
    945                           
-   946                           ;WAFR-01-C001-HD-debug-main.c: 255: PORTCbits.RC6 = 0;
+   946                           ;WAFR-01-C001-HD-debug-main.c: 259: PORTCbits.RC6 = 0;
    947  0002B2  9C82               	bcf	3970,6,c	;volatile
    948                           
-   949                           ;WAFR-01-C001-HD-debug-main.c: 256: PORTCbits.RC7 = 0;
+   949                           ;WAFR-01-C001-HD-debug-main.c: 260: PORTCbits.RC7 = 0;
    950  0002B4  9E82               	bcf	3970,7,c	;volatile
    951                           
-   952                           ;WAFR-01-C001-HD-debug-main.c: 258: }else if ( adcValue > 891 )
+   952                           ;WAFR-01-C001-HD-debug-main.c: 262: }else if ( adcValue > 891 )
    953  0002B6  D79E               	goto	l81
    954  0002B8                     l2712:
    955  0002B8  0100               	movlb	0	; () banked
@@ -972,40 +972,40 @@ Microchip Technology Omniscient Code Generator v1.35 (Free mode) build 201507080
    965  0002CC  D00F               	goto	l2726
    966                           
    967                           ; BSR set to: 0
-   968                           ;WAFR-01-C001-HD-debug-main.c: 259: {
-   969                           ;WAFR-01-C001-HD-debug-main.c: 260: PORTCbits.RC0 = 1;
+   968                           ;WAFR-01-C001-HD-debug-main.c: 263: {
+   969                           ;WAFR-01-C001-HD-debug-main.c: 264: PORTCbits.RC0 = 1;
    970  0002CE  8082               	bsf	3970,0,c	;volatile
    971                           
-   972                           ;WAFR-01-C001-HD-debug-main.c: 261: PORTCbits.RC1 = 1;
+   972                           ;WAFR-01-C001-HD-debug-main.c: 265: PORTCbits.RC1 = 1;
    973  0002D0  8282               	bsf	3970,1,c	;volatile
    974                           
-   975                           ;WAFR-01-C001-HD-debug-main.c: 262: PORTCbits.RC3 = 1;
+   975                           ;WAFR-01-C001-HD-debug-main.c: 266: PORTCbits.RC3 = 1;
    976  0002D2  8682               	bsf	3970,3,c	;volatile
    977                           
-   978                           ;WAFR-01-C001-HD-debug-main.c: 263: PORTCbits.RC4 = 1;
+   978                           ;WAFR-01-C001-HD-debug-main.c: 267: PORTCbits.RC4 = 1;
    979  0002D4  8882               	bsf	3970,4,c	;volatile
    980                           
    981                           ; BSR set to: 0
-   982                           ;WAFR-01-C001-HD-debug-main.c: 264: delay_ms(200);
+   982                           ;WAFR-01-C001-HD-debug-main.c: 268: delay_ms(200);
    983  0002D6  0E00               	movlw	0
    984  0002D8  6E18               	movwf	delay_ms@x+1,c
    985  0002DA  0EC8               	movlw	200
    986  0002DC  6E17               	movwf	delay_ms@x,c
    987  0002DE  EC73  F005         	call	_delay_ms	;wreg free
    988                           
-   989                           ;WAFR-01-C001-HD-debug-main.c: 265: PORTCbits.RC0 = 0;
+   989                           ;WAFR-01-C001-HD-debug-main.c: 269: PORTCbits.RC0 = 0;
    990  0002E2  9082               	bcf	3970,0,c	;volatile
    991                           
-   992                           ;WAFR-01-C001-HD-debug-main.c: 266: PORTCbits.RC1 = 0;
+   992                           ;WAFR-01-C001-HD-debug-main.c: 270: PORTCbits.RC1 = 0;
    993  0002E4  9282               	bcf	3970,1,c	;volatile
    994                           
-   995                           ;WAFR-01-C001-HD-debug-main.c: 267: PORTCbits.RC3 = 0;
+   995                           ;WAFR-01-C001-HD-debug-main.c: 271: PORTCbits.RC3 = 0;
    996  0002E6  9682               	bcf	3970,3,c	;volatile
    997                           
-   998                           ;WAFR-01-C001-HD-debug-main.c: 268: PORTCbits.RC4 = 0;
+   998                           ;WAFR-01-C001-HD-debug-main.c: 272: PORTCbits.RC4 = 0;
    999  0002E8  9882               	bcf	3970,4,c	;volatile
   1000                           
-  1001                           ;WAFR-01-C001-HD-debug-main.c: 269: }else if ( adcValue > 816)
+  1001                           ;WAFR-01-C001-HD-debug-main.c: 273: }else if ( adcValue > 816)
   1002  0002EA  D784               	goto	l81
   1003  0002EC                     l2726:
   1004  0002EC  0100               	movlb	0	; () banked
@@ -1021,68 +1021,68 @@ Microchip Technology Omniscient Code Generator v1.35 (Free mode) build 201507080
   1014  000300  D00B               	goto	l97
   1015                           
   1016                           ; BSR set to: 0
-  1017                           ;WAFR-01-C001-HD-debug-main.c: 270: {
-  1018                           ;WAFR-01-C001-HD-debug-main.c: 271: PORTCbits.RC0 = 1;
+  1017                           ;WAFR-01-C001-HD-debug-main.c: 274: {
+  1018                           ;WAFR-01-C001-HD-debug-main.c: 275: PORTCbits.RC0 = 1;
   1019  000302  8082               	bsf	3970,0,c	;volatile
   1020                           
-  1021                           ;WAFR-01-C001-HD-debug-main.c: 272: PORTCbits.RC1 = 1;
+  1021                           ;WAFR-01-C001-HD-debug-main.c: 276: PORTCbits.RC1 = 1;
   1022  000304  8282               	bsf	3970,1,c	;volatile
   1023                           
   1024                           ; BSR set to: 0
-  1025                           ;WAFR-01-C001-HD-debug-main.c: 273: delay_ms(200);
+  1025                           ;WAFR-01-C001-HD-debug-main.c: 277: delay_ms(200);
   1026  000306  0E00               	movlw	0
   1027  000308  6E18               	movwf	delay_ms@x+1,c
   1028  00030A  0EC8               	movlw	200
   1029  00030C  6E17               	movwf	delay_ms@x,c
   1030  00030E  EC73  F005         	call	_delay_ms	;wreg free
   1031                           
-  1032                           ;WAFR-01-C001-HD-debug-main.c: 274: PORTCbits.RC0 = 0;
+  1032                           ;WAFR-01-C001-HD-debug-main.c: 278: PORTCbits.RC0 = 0;
   1033  000312  9082               	bcf	3970,0,c	;volatile
   1034                           
-  1035                           ;WAFR-01-C001-HD-debug-main.c: 275: PORTCbits.RC1 = 0;
+  1035                           ;WAFR-01-C001-HD-debug-main.c: 279: PORTCbits.RC1 = 0;
   1036  000314  9282               	bcf	3970,1,c	;volatile
   1037                           
-  1038                           ;WAFR-01-C001-HD-debug-main.c: 276: } else
+  1038                           ;WAFR-01-C001-HD-debug-main.c: 280: } else
   1039  000316  D76E               	goto	l81
   1040  000318                     l97:
   1041                           
   1042                           ; BSR set to: 0
-  1043                           ;WAFR-01-C001-HD-debug-main.c: 277: {
-  1044                           ;WAFR-01-C001-HD-debug-main.c: 278: PORTCbits.RC0 = 1;
+  1043                           ;WAFR-01-C001-HD-debug-main.c: 281: {
+  1044                           ;WAFR-01-C001-HD-debug-main.c: 282: PORTCbits.RC0 = 1;
   1045  000318  8082               	bsf	3970,0,c	;volatile
   1046                           
-  1047                           ;WAFR-01-C001-HD-debug-main.c: 279: PORTCbits.RC1 = 1;
+  1047                           ;WAFR-01-C001-HD-debug-main.c: 283: PORTCbits.RC1 = 1;
   1048  00031A  8282               	bsf	3970,1,c	;volatile
   1049                           
   1050                           ; BSR set to: 0
-  1051                           ;WAFR-01-C001-HD-debug-main.c: 280: delay_ms(100);
+  1051                           ;WAFR-01-C001-HD-debug-main.c: 284: delay_ms(100);
   1052  00031C  0E00               	movlw	0
   1053  00031E  6E18               	movwf	delay_ms@x+1,c
   1054  000320  0E64               	movlw	100
   1055  000322  6E17               	movwf	delay_ms@x,c
   1056  000324  EC73  F005         	call	_delay_ms	;wreg free
   1057                           
-  1058                           ;WAFR-01-C001-HD-debug-main.c: 281: PORTCbits.RC0 = 0;
+  1058                           ;WAFR-01-C001-HD-debug-main.c: 285: PORTCbits.RC0 = 0;
   1059  000328  9082               	bcf	3970,0,c	;volatile
   1060                           
-  1061                           ;WAFR-01-C001-HD-debug-main.c: 282: PORTCbits.RC1 = 0;
+  1061                           ;WAFR-01-C001-HD-debug-main.c: 286: PORTCbits.RC1 = 0;
   1062  00032A  9282               	bcf	3970,1,c	;volatile
   1063                           
-  1064                           ;WAFR-01-C001-HD-debug-main.c: 283: delay_ms(100);
+  1064                           ;WAFR-01-C001-HD-debug-main.c: 287: delay_ms(100);
   1065  00032C  0E00               	movlw	0
   1066  00032E  6E18               	movwf	delay_ms@x+1,c
   1067  000330  0E64               	movlw	100
   1068  000332  6E17               	movwf	delay_ms@x,c
   1069  000334  EC73  F005         	call	_delay_ms	;wreg free
   1070                           
-  1071                           ;WAFR-01-C001-HD-debug-main.c: 284: }
-  1072                           ;WAFR-01-C001-HD-debug-main.c: 285: }
-  1073                           ;WAFR-01-C001-HD-debug-main.c: 288: } else
+  1071                           ;WAFR-01-C001-HD-debug-main.c: 288: }
+  1072                           ;WAFR-01-C001-HD-debug-main.c: 289: }
+  1073                           ;WAFR-01-C001-HD-debug-main.c: 290: } else
   1074  000338  D75D               	goto	l81
   1075  00033A                     l2742:
   1076                           
-  1077                           ;WAFR-01-C001-HD-debug-main.c: 289: {
-  1078                           ;WAFR-01-C001-HD-debug-main.c: 290: flagChargeBat = 0 ;
+  1077                           ;WAFR-01-C001-HD-debug-main.c: 291: {
+  1078                           ;WAFR-01-C001-HD-debug-main.c: 292: flagChargeBat = 0 ;
   1079  00033A  0E00               	movlw	0
   1080  00033C  0100               	movlb	0	; () banked
   1081  00033E  6FAC               	movwf	main@flagChargeBat& (0+255),b
@@ -4125,7 +4125,7 @@ Auto Spaces:
     COMRAM          126     56     100
     BANK0           128     10      50
     BANK1           256      0       0
-    BANK2           239      0       0
+    BANK2           256      0       0
 
 Pointer List with Targets:
 
@@ -4315,37 +4315,27 @@ Call Graph Tables:
 
  Address spaces:
 Name               Size   Autos  Total    Cost      Usage
-BIGRAM             2EE      0       0      10        0.0%
+BIGRAM             2FF      0       0      10        0.0%
 EEDATA             100      0       0       0        0.0%
+BITBANK2           100      0       0       8        0.0%
+BANK2              100      0       0       9        0.0%
 BITBANK1           100      0       0       6        0.0%
 BANK1              100      0       0       7        0.0%
-BITBANK2            EF      0       0       8        0.0%
-BANK2               EF      0       0       9        0.0%
-BITBANK0            80      0       0       3        0.0%
-BANK0               80      A      32       4       39.1%
+BITBANK0            80      0       0       4        0.0%
+BANK0               80      A      32       5       39.1%
 BITCOMRAM           7E      0       0       0        0.0%
 COMRAM              7E     38      64       1       79.4%
-BITSFR_5             0      0       0      40        0.0%
-SFR_5                0      0       0      40        0.0%
-BITSFR_4             0      0       0      40        0.0%
-SFR_4                0      0       0      40        0.0%
-BITSFR_3             0      0       0      40        0.0%
-SFR_3                0      0       0      40        0.0%
-BITSFR_2             0      0       0      40        0.0%
-SFR_2                0      0       0      40        0.0%
-BITSFR_1             0      0       0      40        0.0%
-SFR_1                0      0       0      40        0.0%
 BITSFR               0      0       0      40        0.0%
 SFR                  0      0       0      40        0.0%
 STACK                0      0       0       2        0.0%
 NULL                 0      0       0       0        0.0%
-ABS                  0      0      96       5        0.0%
+ABS                  0      0      96       3        0.0%
 DATA                 0      0      96      11        0.0%
 CODE                 0      0       0       0        0.0%
 
 
 Microchip Technology PIC18 Macro Assembler V1.35 build -356382666 
-Symbol Table                                                                                   Wed Oct 14 15:40:53 2015
+Symbol Table                                                                                   Wed Oct 14 17:03:08 2015
 
               _buttonPushTimeStop 0051                       __CFG_CP0$ON 000000  
                      __CFG_CP1$ON 000000              __size_of_WriteEEprom 0028  

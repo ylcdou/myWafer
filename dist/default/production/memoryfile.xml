@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project>
-  <executable name="dist/default/production\WAFR-01-C001.X.production.hex">
+  <executable name="dist/default/production\myWafer.production.hex">
     <memory name="program">
       <units>bytes</units>
       <length>16384</length>
-      <used>3096</used>
-      <free>13288</free>
+      <used>3088</used>
+      <free>13296</free>
     </memory>
     <memory name="data">
       <units>bytes</units>
