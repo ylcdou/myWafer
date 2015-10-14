@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project>
+  <executable name="dist/default/debug\WAFR-01-C001.X.debug.hex">
+    <memory name="program">
+      <units>bytes</units>
+      <length>16384</length>
+      <used>3090</used>
+      <free>13294</free>
+    </memory>
+    <memory name="data">
+      <units>bytes</units>
+      <length>768</length>
+      <used>151</used>
+      <free>617</free>
+    </memory>
+  </executable>
+</project>

@@ -1,0 +1,12 @@
+ build/default/production/WAFR-01-C001\ HD-debug.X/DS18B20/DS18B20.d  \
+ build/default/production/WAFR-01-C001\ HD-debug.X/DS18B20/DS18B20.p1:  \
+ WAFR-01-C001\ HD-debug.X/DS18B20/DS18B20.c  \
+WAFR-01-C001\ HD-debug.X/DS18B20/../sys/../RGBLedDisplay/RGBLedDisplay.h  \
+WAFR-01-C001\ HD-debug.X/DS18B20/../sys/../keyboard/keyboard.h  \
+WAFR-01-C001\ HD-debug.X/DS18B20/../sys/../user/user.h  \
+WAFR-01-C001\ HD-debug.X/DS18B20/../sys/../PIC18datatype/UserData.h  \
+WAFR-01-C001\ HD-debug.X/DS18B20/../sys/../sys/system.h  \
+WAFR-01-C001\ HD-debug.X/DS18B20/../sys/includes.h  \
+WAFR-01-C001\ HD-debug.X/DS18B20/../sys/../EEprom/EEprom.h  \
+WAFR-01-C001\ HD-debug.X/DS18B20/../sys/../DS18B20/DS18B20.h  \
+WAFR-01-C001\ HD-debug.X/DS18B20/../sys/../WAFR-01-C001-HD-debug\ main/WAFR-01-C001-HD-debug-main.h 
