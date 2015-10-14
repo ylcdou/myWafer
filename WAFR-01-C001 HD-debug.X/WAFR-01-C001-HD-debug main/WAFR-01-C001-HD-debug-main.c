@@ -287,8 +287,6 @@
                           delay_ms(100);
                         }
           }  // end of else{
-          
-
         } else 
         {
             flagChargeBat = 0 ;
