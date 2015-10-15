@@ -11,9 +11,7 @@
  *          two Analog Input 
  * 
  * Revision history: 
-
  *  * Modified: 
-
  *  * Note:
  * 
  * 
@@ -29,6 +27,7 @@
 
 
 //#define Check_Battery_ability
+#define Check_Temp_AD597output
 
 /******************************************************************************/
 /* User Global Variable Declaration                                           */
@@ -188,7 +187,107 @@
              }  // end of while
     
     }
-#endif     
+#endif   
+    
+#ifdef Check_Temp_AD597output    
+    while(1)
+    {
+         //get the Temp from voltage from AD597output
+         // using the data check with iron solder station
+        //   350 ( 176 'C)    0.623  V
+        //   356 ( 180 'C)    0.625  V
+        //   370 ( 187 'C)    0.667  V
+        //   400 ( 204 'C)    0.735  V
+        //   410 ( 210 'C)    0.731  V
+        //   420 ( 216 'C)    0.76   V
+        //   450 ( 232 'C)    0.82   V
+        //   500 ( 260 'C)    0.92   V
+    
+        adcValue = GetAdcAD597Value( AD_AD597_CHANNEL  );
+        
+         turnOffAllLed();        // turn off all RGB LED
+        if ( adcValue > 376 )   // ( 0.92/2.5 ) * 1024 = 367
+        {
+            Led_LowRed = OFF ;
+            Led_LowGreen = OFF ;
+            Led_LowGreen = OFF ;
+            Led_MediumRed = OFF ;
+            Led_MediumGreen = OFF ;
+            Led_MediumBlue = OFF ;
+
+            Led_HighRed = OFF ;
+            Led_HighGreen = OFF ;
+            Led_HighBlue = ON ;
+        }else if (adcValue >335) //( 0.82/2.5 ) * 1024 = 335
+        {
+            Led_LowRed = OFF ;
+            Led_LowGreen = OFF ;
+            Led_LowGreen = OFF ;
+            Led_MediumRed = OFF ;
+            Led_MediumGreen = OFF ;
+            Led_MediumBlue = OFF ;
+
+            Led_HighRed = OFF ;
+            Led_HighGreen = ON ;
+        } else if ( adcValue > 310 )  // ( 0.76/2.5 ) * 1024 = 310
+        {
+            Led_LowRed = OFF ;
+            Led_LowGreen = OFF ;
+            Led_LowBlue = OFF ;
+            Led_MediumRed = OFF ;
+            Led_MediumGreen = OFF ;
+            Led_MediumBlue = OFF ;
+
+            Led_HighRed = ON ;
+        } else if (adcValue >307 )  // ( 0.751/2.5 ) * 1024 = 307
+        {
+            Led_LowRed = OFF ;
+            Led_LowGreen = OFF ;
+            Led_LowBlue = OFF ;
+            Led_MediumRed = OFF ;
+            Led_MediumGreen = OFF ;
+            Led_MediumBlue = ON ;
+        }else if( adcValue > 299 ) // ( 0.731/2.5 ) * 1024 = 299
+
+        {
+            Led_LowRed = OFF ;
+            Led_LowGreen = OFF ;
+            Led_LowBlue = OFF ;
+            Led_MediumRed = OFF ;
+            Led_MediumGreen = ON ;
+        }else if(adcValue > 272)  // ( 0.667/2.5 ) * 1024 = 272
+        {
+            Led_LowRed = OFF ;
+            Led_LowGreen = OFF ;
+            Led_LowBlue = OFF ;
+            Led_MediumRed = ON ;
+        }else if(adcValue> 255)   // ( 0.625/2.5 ) * 1024 = 255
+        {
+            Led_LowRed = OFF ;
+            Led_LowGreen = OFF ;
+            Led_LowBlue = ON ;
+        }else if (adcValue> 240)   // ( 0.623/2.5 ) * 1024 = 254
+        {
+            Led_LowRed = OFF ;
+            Led_LowGreen = ON ;
+            Led_LowBlue = OFF ;
+        }else
+        {
+            Led_LowRed = ON ;
+        }
+            delay_ms(200);
+
+            keyValue = ProcessButton();
+             if( keyValue == BUTTON_SINGLE_CLICK )
+             {
+                 Drive_Plates = ! Drive_Plates ;
+             } else if ( keyValue == BUTTON_DOUBLE_CLICK)
+             {
+                 break;
+             }
+    }
+    
+#endif    
     
     /* start */ 
     while(TRUE)
