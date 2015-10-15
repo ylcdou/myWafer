@@ -3907,7 +3907,7 @@ void delay_s(unsigned int x) ;
 void delay_ms(unsigned int x) ;
 void delay_10us(void);
 
-# 40 "WAFR-01-C001 HD-debug.X/WAFR-01-C001-HD-debug main/WAFR-01-C001-HD-debug-main.c"
+# 41 "WAFR-01-C001 HD-debug.X/WAFR-01-C001-HD-debug main/WAFR-01-C001-HD-debug-main.c"
 int main(int argc, char** argv)
 {
 unsigned int i;
@@ -3927,14 +3927,14 @@ InitializePinmux();
 
 PORTBbits.RB2 = 1;
 
-# 66
+# 67
 InitializeInterrupts();
 
 InitializeTimer0();
 
 InitializeINT0();
 
-# 74
+# 75
 InitializeAD();
 
 turnOffAllLed();
@@ -3942,7 +3942,7 @@ turnOffAllLed();
 
 PORTBbits.RB1 = 0 ;
 
-# 85
+# 86
 while ( !PORTBbits.RB0 )
 {
 PORTCbits.RC0 = ! PORTCbits.RC0 ;
@@ -3954,7 +3954,7 @@ PORTCbits.RC0 = 0 ;
 
 timeSystemRun = 0 ;
 
-# 100
+# 101
 for ( i = 0 ; i < 10 ; i++)
 {
 adcBatValue[i] = 816 ;
@@ -4009,7 +4009,7 @@ break;
 }
 }
 
-# 158
+# 159
 levelTmpSetting = ReadEEprom( 0 );
 if ( (levelTmpSetting > 3) | (levelTmpSetting == 0 ) )
 {
@@ -4017,7 +4017,98 @@ levelTmpSetting = 1 ;
 
 }
 
-# 192
+# 193
+while(1)
+{
+
+# 206
+adcValue = GetAdcAD597Value( 0 );
+
+turnOffAllLed();
+if ( adcValue > 376 )
+{
+PORTCbits.RC0 = 0 ;
+PORTCbits.RC1 = 0 ;
+PORTCbits.RC1 = 0 ;
+PORTCbits.RC3 = 0 ;
+PORTCbits.RC4 = 0 ;
+PORTCbits.RC5 = 0 ;
+
+PORTCbits.RC6 = 0 ;
+PORTCbits.RC7 = 0 ;
+PORTBbits.RB3 = 1 ;
+}else if (adcValue >335)
+{
+PORTCbits.RC0 = 0 ;
+PORTCbits.RC1 = 0 ;
+PORTCbits.RC1 = 0 ;
+PORTCbits.RC3 = 0 ;
+PORTCbits.RC4 = 0 ;
+PORTCbits.RC5 = 0 ;
+
+PORTCbits.RC6 = 0 ;
+PORTCbits.RC7 = 1 ;
+} else if ( adcValue > 310 )
+{
+PORTCbits.RC0 = 0 ;
+PORTCbits.RC1 = 0 ;
+PORTCbits.RC2 = 0 ;
+PORTCbits.RC3 = 0 ;
+PORTCbits.RC4 = 0 ;
+PORTCbits.RC5 = 0 ;
+
+PORTCbits.RC6 = 1 ;
+} else if (adcValue >307 )
+{
+PORTCbits.RC0 = 0 ;
+PORTCbits.RC1 = 0 ;
+PORTCbits.RC2 = 0 ;
+PORTCbits.RC3 = 0 ;
+PORTCbits.RC4 = 0 ;
+PORTCbits.RC5 = 1 ;
+}else if( adcValue > 299 )
+
+{
+PORTCbits.RC0 = 0 ;
+PORTCbits.RC1 = 0 ;
+PORTCbits.RC2 = 0 ;
+PORTCbits.RC3 = 0 ;
+PORTCbits.RC4 = 1 ;
+}else if(adcValue > 272)
+{
+PORTCbits.RC0 = 0 ;
+PORTCbits.RC1 = 0 ;
+PORTCbits.RC2 = 0 ;
+PORTCbits.RC3 = 1 ;
+}else if(adcValue> 255)
+{
+PORTCbits.RC0 = 0 ;
+PORTCbits.RC1 = 0 ;
+PORTCbits.RC2 = 1 ;
+}else if (adcValue> 240)
+{
+PORTCbits.RC0 = 0 ;
+PORTCbits.RC1 = 1 ;
+PORTCbits.RC2 = 0 ;
+}else
+{
+PORTCbits.RC0 = 1 ;
+}
+delay_ms(200);
+
+keyValue = ProcessButton();
+if( keyValue == 1 )
+{
+PORTBbits.RB1 = ! PORTBbits.RB1 ;
+} else if ( keyValue == 2)
+{
+break;
+}
+}
+
+
+
+
 while(1)
 {
 if ( !flagChargeBat )
@@ -4039,7 +4130,7 @@ break;
 default: break;
 }
 
-# 220
+# 321
 if ( timerHalfSecond >= 1 )
 {
 LevelTmpSetShow();

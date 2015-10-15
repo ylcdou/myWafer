@@ -67,9 +67,9 @@
 [v _delay_ms delay_ms `(v  1 e 0 0 ]
 "54
 [v _delay_10us delay_10us `(v  1 e 0 0 ]
-"40 Z:\Current Projects\Wafer\Software\Firmware\WAFR-01-C001.X\myWafer\WAFR-01-C001 HD-debug.X/WAFR-01-C001-HD-debug main/WAFR-01-C001-HD-debug-main.c
+"41 Z:\Current Projects\Wafer\Software\Firmware\WAFR-01-C001.X\myWafer\WAFR-01-C001 HD-debug.X/WAFR-01-C001-HD-debug main/WAFR-01-C001-HD-debug-main.c
 [v _main main `(i  1 e 2 0 ]
-[s S234 . 1 `uc 1 RA0 1 0 :1:0 
+[s S239 . 1 `uc 1 RA0 1 0 :1:0 
 `uc 1 RA1 1 0 :1:1 
 `uc 1 RA2 1 0 :1:2 
 `uc 1 RA3 1 0 :1:3 
@@ -79,7 +79,7 @@
 `uc 1 RA7 1 0 :1:7 
 ]
 "115 C:\Program Files (x86)\Microchip\xc8\v1.35\include\pic18f2420.h
-[s S243 . 1 `uc 1 AN0 1 0 :1:0 
+[s S248 . 1 `uc 1 AN0 1 0 :1:0 
 `uc 1 AN1 1 0 :1:1 
 `uc 1 AN2 1 0 :1:2 
 `uc 1 AN3 1 0 :1:3 
@@ -88,7 +88,7 @@
 `uc 1 OSC2 1 0 :1:6 
 `uc 1 OSC1 1 0 :1:7 
 ]
-[s S252 . 1 `uc 1 . 1 0 :2:0 
+[s S257 . 1 `uc 1 . 1 0 :2:0 
 `uc 1 VREFN 1 0 :1:2 
 `uc 1 VREFP 1 0 :1:3 
 `uc 1 . 1 0 :1:4 
@@ -96,31 +96,31 @@
 `uc 1 CLKO 1 0 :1:6 
 `uc 1 CLKI 1 0 :1:7 
 ]
-[s S260 . 1 `uc 1 . 1 0 :5:0 
+[s S265 . 1 `uc 1 . 1 0 :5:0 
 `uc 1 NOT_SS 1 0 :1:5 
 ]
-[s S263 . 1 `uc 1 . 1 0 :2:0 
+[s S268 . 1 `uc 1 . 1 0 :2:0 
 `uc 1 CVREF 1 0 :1:2 
 `uc 1 . 1 0 :2:3 
 `uc 1 nSS 1 0 :1:5 
 ]
-[s S268 . 1 `uc 1 . 1 0 :5:0 
+[s S273 . 1 `uc 1 . 1 0 :5:0 
 `uc 1 LVDIN 1 0 :1:5 
 ]
-[s S271 . 1 `uc 1 . 1 0 :5:0 
+[s S276 . 1 `uc 1 . 1 0 :5:0 
 `uc 1 HLVDIN 1 0 :1:5 
 ]
-[s S274 . 1 `uc 1 . 1 0 :4:0 
+[s S279 . 1 `uc 1 . 1 0 :4:0 
 `uc 1 C1OUT 1 0 :1:4 
 `uc 1 C2OUT 1 0 :1:5 
 ]
-[s S278 . 1 `uc 1 . 1 0 :7:0 
+[s S283 . 1 `uc 1 . 1 0 :7:0 
 `uc 1 RJPU 1 0 :1:7 
 ]
-[s S281 . 1 `uc 1 ULPWUIN 1 0 :1:0 
+[s S286 . 1 `uc 1 ULPWUIN 1 0 :1:0 
 ]
-[u S283 . 1 `S234 1 . 1 0 `S243 1 . 1 0 `S252 1 . 1 0 `S260 1 . 1 0 `S263 1 . 1 0 `S268 1 . 1 0 `S271 1 . 1 0 `S274 1 . 1 0 `S278 1 . 1 0 `S281 1 . 1 0 ]
-[v _PORTAbits PORTAbits `VES283  1 e 1 @3968 ]
+[u S288 . 1 `S239 1 . 1 0 `S248 1 . 1 0 `S257 1 . 1 0 `S265 1 . 1 0 `S268 1 . 1 0 `S273 1 . 1 0 `S276 1 . 1 0 `S279 1 . 1 0 `S283 1 . 1 0 `S286 1 . 1 0 ]
+[v _PORTAbits PORTAbits `VES288  1 e 1 @3968 ]
 [s S29 . 1 `uc 1 RB0 1 0 :1:0 
 `uc 1 RB1 1 0 :1:1 
 `uc 1 RB2 1 0 :1:2 
@@ -196,7 +196,7 @@
 ]
 [u S155 . 1 `S120 1 . 1 0 `S129 1 . 1 0 `S138 1 . 1 0 `S147 1 . 1 0 `S149 1 . 1 0 `S152 1 . 1 0 ]
 [v _PORTCbits PORTCbits `VES155  1 e 1 @3970 ]
-[s S571 . 1 `uc 1 TRISA0 1 0 :1:0 
+[s S576 . 1 `uc 1 TRISA0 1 0 :1:0 
 `uc 1 TRISA1 1 0 :1:1 
 `uc 1 TRISA2 1 0 :1:2 
 `uc 1 TRISA3 1 0 :1:3 
@@ -206,9 +206,9 @@
 `uc 1 TRISA7 1 0 :1:7 
 ]
 "1321
-[u S589 . 1 `S571 1 . 1 0 `S234 1 . 1 0 ]
-[v _TRISAbits TRISAbits `VES589  1 e 1 @3986 ]
-[s S531 . 1 `uc 1 TRISB0 1 0 :1:0 
+[u S594 . 1 `S576 1 . 1 0 `S239 1 . 1 0 ]
+[v _TRISAbits TRISAbits `VES594  1 e 1 @3986 ]
+[s S536 . 1 `uc 1 TRISB0 1 0 :1:0 
 `uc 1 TRISB1 1 0 :1:1 
 `uc 1 TRISB2 1 0 :1:2 
 `uc 1 TRISB3 1 0 :1:3 
@@ -218,9 +218,9 @@
 `uc 1 TRISB7 1 0 :1:7 
 ]
 "1542
-[u S549 . 1 `S531 1 . 1 0 `S29 1 . 1 0 ]
-[v _TRISBbits TRISBbits `VES549  1 e 1 @3987 ]
-[s S491 . 1 `uc 1 TRISC0 1 0 :1:0 
+[u S554 . 1 `S536 1 . 1 0 `S29 1 . 1 0 ]
+[v _TRISBbits TRISBbits `VES554  1 e 1 @3987 ]
+[s S496 . 1 `uc 1 TRISC0 1 0 :1:0 
 `uc 1 TRISC1 1 0 :1:1 
 `uc 1 TRISC2 1 0 :1:2 
 `uc 1 TRISC3 1 0 :1:3 
@@ -230,9 +230,9 @@
 `uc 1 TRISC7 1 0 :1:7 
 ]
 "1763
-[u S509 . 1 `S491 1 . 1 0 `S120 1 . 1 0 ]
-[v _TRISCbits TRISCbits `VES509  1 e 1 @3988 ]
-[s S830 . 1 `uc 1 TMR1IF 1 0 :1:0 
+[u S514 . 1 `S496 1 . 1 0 `S120 1 . 1 0 ]
+[v _TRISCbits TRISCbits `VES514  1 e 1 @3988 ]
+[s S835 . 1 `uc 1 TMR1IF 1 0 :1:0 
 `uc 1 TMR2IF 1 0 :1:1 
 `uc 1 CCP1IF 1 0 :1:2 
 `uc 1 SSPIF 1 0 :1:3 
@@ -241,15 +241,15 @@
 `uc 1 ADIF 1 0 :1:6 
 ]
 "2113
-[s S838 . 1 `uc 1 . 1 0 :5:0 
+[s S843 . 1 `uc 1 . 1 0 :5:0 
 `uc 1 RC1IF 1 0 :1:5 
 ]
-[s S841 . 1 `uc 1 . 1 0 :4:0 
+[s S846 . 1 `uc 1 . 1 0 :4:0 
 `uc 1 TX1IF 1 0 :1:4 
 ]
-[u S844 . 1 `S830 1 . 1 0 `S838 1 . 1 0 `S841 1 . 1 0 ]
-[v _PIR1bits PIR1bits `VES844  1 e 1 @3998 ]
-[s S1214 . 1 `uc 1 RD 1 0 :1:0 
+[u S849 . 1 `S835 1 . 1 0 `S843 1 . 1 0 `S846 1 . 1 0 ]
+[v _PIR1bits PIR1bits `VES849  1 e 1 @3998 ]
+[s S1215 . 1 `uc 1 RD 1 0 :1:0 
 `uc 1 WR 1 0 :1:1 
 `uc 1 WREN 1 0 :1:2 
 `uc 1 WRERR 1 0 :1:3 
@@ -259,93 +259,93 @@
 `uc 1 EEPGD 1 0 :1:7 
 ]
 "2451
-[s S1223 . 1 `uc 1 . 1 0 :6:0 
+[s S1224 . 1 `uc 1 . 1 0 :6:0 
 `uc 1 EEFS 1 0 :1:6 
 ]
-[u S1226 . 1 `S1214 1 . 1 0 `S1223 1 . 1 0 ]
-[v _EECON1bits EECON1bits `VES1226  1 e 1 @4006 ]
+[u S1227 . 1 `S1215 1 . 1 0 `S1224 1 . 1 0 ]
+[v _EECON1bits EECON1bits `VES1227  1 e 1 @4006 ]
 "2495
 [v _EECON2 EECON2 `VEuc  1 e 1 @4007 ]
 "2501
 [v _EEDATA EEDATA `VEuc  1 e 1 @4008 ]
 "2507
 [v _EEADR EEADR `VEuc  1 e 1 @4009 ]
-[s S725 . 1 `uc 1 ADCS 1 0 :3:0 
+[s S730 . 1 `uc 1 ADCS 1 0 :3:0 
 `uc 1 ACQT 1 0 :3:3 
 `uc 1 . 1 0 :1:6 
 `uc 1 ADFM 1 0 :1:7 
 ]
 "3922
-[s S730 . 1 `uc 1 ADCS0 1 0 :1:0 
+[s S735 . 1 `uc 1 ADCS0 1 0 :1:0 
 `uc 1 ADCS1 1 0 :1:1 
 `uc 1 ADCS2 1 0 :1:2 
 `uc 1 ACQT0 1 0 :1:3 
 `uc 1 ACQT1 1 0 :1:4 
 `uc 1 ACQT2 1 0 :1:5 
 ]
-[u S737 . 1 `S725 1 . 1 0 `S730 1 . 1 0 ]
-[v _ADCON2bits ADCON2bits `VES737  1 e 1 @4032 ]
-[s S680 . 1 `uc 1 PCFG 1 0 :4:0 
+[u S742 . 1 `S730 1 . 1 0 `S735 1 . 1 0 ]
+[v _ADCON2bits ADCON2bits `VES742  1 e 1 @4032 ]
+[s S685 . 1 `uc 1 PCFG 1 0 :4:0 
 `uc 1 VCFG 1 0 :2:4 
 ]
 "4002
-[s S683 . 1 `uc 1 PCFG0 1 0 :1:0 
+[s S688 . 1 `uc 1 PCFG0 1 0 :1:0 
 `uc 1 PCFG1 1 0 :1:1 
 `uc 1 PCFG2 1 0 :1:2 
 `uc 1 PCFG3 1 0 :1:3 
 `uc 1 VCFG0 1 0 :1:4 
 `uc 1 VCFG1 1 0 :1:5 
 ]
-[s S690 . 1 `uc 1 . 1 0 :3:0 
+[s S695 . 1 `uc 1 . 1 0 :3:0 
 `uc 1 CHSN3 1 0 :1:3 
 ]
-[s S693 . 1 `uc 1 . 1 0 :4:0 
+[s S698 . 1 `uc 1 . 1 0 :4:0 
 `uc 1 VCFG01 1 0 :1:4 
 ]
-[s S696 . 1 `uc 1 . 1 0 :5:0 
+[s S701 . 1 `uc 1 . 1 0 :5:0 
 `uc 1 VCFG11 1 0 :1:5 
 ]
-[u S699 . 1 `S680 1 . 1 0 `S683 1 . 1 0 `S690 1 . 1 0 `S693 1 . 1 0 `S696 1 . 1 0 ]
-[v _ADCON1bits ADCON1bits `VES699  1 e 1 @4033 ]
+[u S704 . 1 `S685 1 . 1 0 `S688 1 . 1 0 `S695 1 . 1 0 `S698 1 . 1 0 `S701 1 . 1 0 ]
+[v _ADCON1bits ADCON1bits `VES704  1 e 1 @4033 ]
 "4061
 [v _ADCON0 ADCON0 `VEuc  1 e 1 @4034 ]
-[s S753 . 1 `uc 1 . 1 0 :1:0 
+[s S758 . 1 `uc 1 . 1 0 :1:0 
 `uc 1 GO_NOT_DONE 1 0 :1:1 
 ]
 "4109
-[s S756 . 1 `uc 1 ADON 1 0 :1:0 
+[s S761 . 1 `uc 1 ADON 1 0 :1:0 
 `uc 1 GO_nDONE 1 0 :1:1 
 `uc 1 CHS 1 0 :4:2 
 ]
-[s S763 . 1 `uc 1 . 1 0 :1:0 
+[s S768 . 1 `uc 1 . 1 0 :1:0 
 `uc 1 GO 1 0 :1:1 
 `uc 1 CHS0 1 0 :1:2 
 `uc 1 CHS1 1 0 :1:3 
 `uc 1 CHS2 1 0 :1:4 
 `uc 1 CHS3 1 0 :1:5 
 ]
-[s S770 . 1 `uc 1 . 1 0 :1:0 
+[s S775 . 1 `uc 1 . 1 0 :1:0 
 `uc 1 DONE 1 0 :1:1 
 ]
-[s S773 . 1 `uc 1 . 1 0 :1:0 
+[s S778 . 1 `uc 1 . 1 0 :1:0 
 `uc 1 NOT_DONE 1 0 :1:1 
 ]
-[s S776 . 1 `uc 1 . 1 0 :1:0 
+[s S781 . 1 `uc 1 . 1 0 :1:0 
 `uc 1 nDONE 1 0 :1:1 
 ]
-[s S779 . 1 `uc 1 . 1 0 :1:0 
+[s S784 . 1 `uc 1 . 1 0 :1:0 
 `uc 1 GO_DONE 1 0 :1:1 
 ]
-[s S782 . 1 `uc 1 . 1 0 :1:0 
+[s S787 . 1 `uc 1 . 1 0 :1:0 
 `uc 1 GODONE 1 0 :1:1 
 ]
-[u S785 . 1 `S753 1 . 1 0 `S756 1 . 1 0 `S753 1 . 1 0 `S763 1 . 1 0 `S770 1 . 1 0 `S773 1 . 1 0 `S776 1 . 1 0 `S779 1 . 1 0 `S782 1 . 1 0 ]
-[v _ADCON0bits ADCON0bits `VES785  1 e 1 @4034 ]
+[u S790 . 1 `S758 1 . 1 0 `S761 1 . 1 0 `S758 1 . 1 0 `S768 1 . 1 0 `S775 1 . 1 0 `S778 1 . 1 0 `S781 1 . 1 0 `S784 1 . 1 0 `S787 1 . 1 0 ]
+[v _ADCON0bits ADCON0bits `VES790  1 e 1 @4034 ]
 "4189
 [v _ADRESL ADRESL `VEuc  1 e 1 @4035 ]
 "4195
 [v _ADRESH ADRESH `VEuc  1 e 1 @4036 ]
-[s S611 . 1 `uc 1 T0PS 1 0 :3:0 
+[s S616 . 1 `uc 1 T0PS 1 0 :3:0 
 `uc 1 PSA 1 0 :1:3 
 `uc 1 T0SE 1 0 :1:4 
 `uc 1 T0CS 1 0 :1:5 
@@ -353,24 +353,24 @@
 `uc 1 TMR0ON 1 0 :1:7 
 ]
 "5482
-[s S618 . 1 `uc 1 T0PS0 1 0 :1:0 
+[s S623 . 1 `uc 1 T0PS0 1 0 :1:0 
 `uc 1 T0PS1 1 0 :1:1 
 `uc 1 T0PS2 1 0 :1:2 
 `uc 1 T0PS3 1 0 :1:3 
 `uc 1 . 1 0 :2:4 
 `uc 1 T016BIT 1 0 :1:6 
 ]
-[u S625 . 1 `S611 1 . 1 0 `S618 1 . 1 0 ]
-[v _T0CONbits T0CONbits `VES625  1 e 1 @4053 ]
+[u S630 . 1 `S616 1 . 1 0 `S623 1 . 1 0 ]
+[v _T0CONbits T0CONbits `VES630  1 e 1 @4053 ]
 "5547
 [v _TMR0L TMR0L `VEuc  1 e 1 @4054 ]
 "5553
 [v _TMR0H TMR0H `VEuc  1 e 1 @4055 ]
-[s S645 . 1 `uc 1 . 1 0 :7:0 
+[s S650 . 1 `uc 1 . 1 0 :7:0 
 `uc 1 NOT_RBPU 1 0 :1:7 
 ]
 "5914
-[s S648 . 1 `uc 1 RBIP 1 0 :1:0 
+[s S653 . 1 `uc 1 RBIP 1 0 :1:0 
 `uc 1 . 1 0 :1:1 
 `uc 1 TMR0IP 1 0 :1:2 
 `uc 1 . 1 0 :1:3 
@@ -379,12 +379,12 @@
 `uc 1 INTEDG0 1 0 :1:6 
 `uc 1 nRBPU 1 0 :1:7 
 ]
-[s S657 . 1 `uc 1 . 1 0 :7:0 
+[s S662 . 1 `uc 1 . 1 0 :7:0 
 `uc 1 RBPU 1 0 :1:7 
 ]
-[u S660 . 1 `S645 1 . 1 0 `S648 1 . 1 0 `S657 1 . 1 0 ]
-[v _INTCON2bits INTCON2bits `VES660  1 e 1 @4081 ]
-[s S404 . 1 `uc 1 RBIF 1 0 :1:0 
+[u S665 . 1 `S650 1 . 1 0 `S653 1 . 1 0 `S662 1 . 1 0 ]
+[v _INTCON2bits INTCON2bits `VES665  1 e 1 @4081 ]
+[s S409 . 1 `uc 1 RBIF 1 0 :1:0 
 `uc 1 INT0IF 1 0 :1:1 
 `uc 1 TMR0IF 1 0 :1:2 
 `uc 1 RBIE 1 0 :1:3 
@@ -394,7 +394,7 @@
 `uc 1 GIE_GIEH 1 0 :1:7 
 ]
 "6010
-[s S413 . 1 `uc 1 RBIF 1 0 :1:0 
+[s S418 . 1 `uc 1 RBIF 1 0 :1:0 
 `uc 1 INT0IF 1 0 :1:1 
 `uc 1 TMR0IF 1 0 :1:2 
 `uc 1 RBIE 1 0 :1:3 
@@ -403,7 +403,7 @@
 `uc 1 PEIE 1 0 :1:6 
 `uc 1 GIE 1 0 :1:7 
 ]
-[s S422 . 1 `uc 1 RBIF 1 0 :1:0 
+[s S427 . 1 `uc 1 RBIF 1 0 :1:0 
 `uc 1 INT0IF 1 0 :1:1 
 `uc 1 TMR0IF 1 0 :1:2 
 `uc 1 RBIE 1 0 :1:3 
@@ -412,7 +412,7 @@
 `uc 1 GIEL 1 0 :1:6 
 `uc 1 GIEH 1 0 :1:7 
 ]
-[s S431 . 1 `uc 1 . 1 0 :1:0 
+[s S436 . 1 `uc 1 . 1 0 :1:0 
 `uc 1 INT0F 1 0 :1:1 
 `uc 1 T0IF 1 0 :1:2 
 `uc 1 . 1 0 :1:3 
@@ -421,12 +421,12 @@
 `uc 1 PEIE 1 0 :1:6 
 `uc 1 GIE 1 0 :1:7 
 ]
-[s S440 . 1 `uc 1 . 1 0 :6:0 
+[s S445 . 1 `uc 1 . 1 0 :6:0 
 `uc 1 GIEL 1 0 :1:6 
 `uc 1 GIEH 1 0 :1:7 
 ]
-[u S444 . 1 `S404 1 . 1 0 `S413 1 . 1 0 `S422 1 . 1 0 `S431 1 . 1 0 `S440 1 . 1 0 ]
-[v _INTCONbits INTCONbits `VES444  1 e 1 @4082 ]
+[u S449 . 1 `S409 1 . 1 0 `S418 1 . 1 0 `S427 1 . 1 0 `S436 1 . 1 0 `S445 1 . 1 0 ]
+[v _INTCONbits INTCONbits `VES449  1 e 1 @4082 ]
 "97 Z:\Current Projects\Wafer\Software\Firmware\WAFR-01-C001.X\myWafer\WAFR-01-C001 HD-debug.X\sys\system.h
 [v _timer0Count timer0Count `uc  1 e 1 0 ]
 "98
@@ -451,20 +451,20 @@
 [v _adcAD597Value adcAD597Value `[10]us  1 e 20 0 ]
 "121
 [v _adcChargeStatValue adcChargeStatValue `[10]us  1 e 20 0 ]
-"40 Z:\Current Projects\Wafer\Software\Firmware\WAFR-01-C001.X\myWafer\WAFR-01-C001 HD-debug.X/WAFR-01-C001-HD-debug main/WAFR-01-C001-HD-debug-main.c
+"41 Z:\Current Projects\Wafer\Software\Firmware\WAFR-01-C001.X\myWafer\WAFR-01-C001 HD-debug.X/WAFR-01-C001-HD-debug main/WAFR-01-C001-HD-debug-main.c
 [v _main main `(i  1 e 2 0 ]
 {
-"49
-[v main@countHeatTime countHeatTime `ul  1 a 4 0 ]
-"47
-[v main@adcValue adcValue `s  1 a 2 8 ]
-"42
-[v main@i i `ui  1 a 2 6 ]
-"43
-[v main@keyValue keyValue `c  1 a 1 5 ]
 "50
+[v main@countHeatTime countHeatTime `ul  1 a 4 0 ]
+"48
+[v main@adcValue adcValue `s  1 a 2 8 ]
+"43
+[v main@i i `ui  1 a 2 5 ]
+"44
+[v main@keyValue keyValue `c  1 a 1 7 ]
+"51
 [v main@flagChargeBat flagChargeBat `uc  1 a 1 4 ]
-"299
+"400
 } 0
 "334 Z:\Current Projects\Wafer\Software\Firmware\WAFR-01-C001.X\myWafer\WAFR-01-C001 HD-debug.X/sys/system.c
 [v _ShutDownSystem ShutDownSystem `(v  1 e 0 0 ]
