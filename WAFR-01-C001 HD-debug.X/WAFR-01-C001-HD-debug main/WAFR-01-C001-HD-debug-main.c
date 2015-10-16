@@ -26,10 +26,6 @@
 #define WAFER_GLOBALS
 #include "..\sys\includes.h"    
 
-
-//#define Check_Battery_ability
-#define Check_Temp_AD597output
-
 /******************************************************************************/
 /* User Global Variable Declaration                                           */
 /******************************************************************************/
@@ -191,6 +187,9 @@
 #endif   
     
 #ifdef Check_Temp_AD597output    
+    uint8 flagHeat = 0 ;
+    uint8  Kp=30 ;
+    uint8 count=0 ;
     while(1)
     {
          //get the Temp from voltage from AD597output
@@ -207,7 +206,7 @@
         adcValue = GetAdcAD597Value( AD_AD597_CHANNEL  );
         
          turnOffAllLed();        // turn off all RGB LED
-        if ( adcValue > 376 )   // ( 0.92/2.5 ) * 1024 = 367
+        if ( adcValue > 345 )   // ( 0.92/2.5 ) * 1024 = 367
         {
             Led_LowRed = OFF ;
             Led_LowGreen = OFF ;
@@ -219,7 +218,7 @@
             Led_HighRed = OFF ;
             Led_HighGreen = OFF ;
             Led_HighBlue = ON ;
-        }else if (adcValue >335) //( 0.82/2.5 ) * 1024 = 335
+        }else if (adcValue >330) //( 0.82/2.5 ) * 1024 = 335
         {
             Led_LowRed = OFF ;
             Led_LowGreen = OFF ;
@@ -230,7 +229,7 @@
 
             Led_HighRed = OFF ;
             Led_HighGreen = ON ;
-        } else if ( adcValue > 310 )  // ( 0.76/2.5 ) * 1024 = 310
+        } else if ( adcValue > 315 )  // ( 0.76/2.5 ) * 1024 = 310
         {
             Led_LowRed = OFF ;
             Led_LowGreen = OFF ;
@@ -240,7 +239,7 @@
             Led_MediumBlue = OFF ;
 
             Led_HighRed = ON ;
-        } else if (adcValue >307 )  // ( 0.751/2.5 ) * 1024 = 307
+        } else if (adcValue >300 )  // ( 0.751/2.5 ) * 1024 = 307
         {
             Led_LowRed = OFF ;
             Led_LowGreen = OFF ;
@@ -248,7 +247,7 @@
             Led_MediumRed = OFF ;
             Led_MediumGreen = OFF ;
             Led_MediumBlue = ON ;
-        }else if( adcValue > 299 ) // ( 0.731/2.5 ) * 1024 = 299
+        }else if( adcValue > 285 ) // ( 0.731/2.5 ) * 1024 = 299
 
         {
             Led_LowRed = OFF ;
@@ -256,7 +255,7 @@
             Led_LowBlue = OFF ;
             Led_MediumRed = OFF ;
             Led_MediumGreen = ON ;
-        }else if(adcValue > 272)  // ( 0.667/2.5 ) * 1024 = 272
+        }else if(adcValue > 270)  // ( 0.667/2.5 ) * 1024 = 272
         {
             Led_LowRed = OFF ;
             Led_LowGreen = OFF ;
@@ -276,12 +275,55 @@
         {
             Led_LowRed = ON ;
         }
-            delay_ms(200);
+  
+         if (flagHeat)
+         {
+             if (adcValue < 192)  // 270 )    // ( 0.731/2.5 ) * 1024 = 299
+             {                        // 299*0.8 = 240 , that is reach 80%
+                                     // start adjust the Kp
+                 Drive_Plates = 1 ;
+             }else
+             {
+                 if (adcValue > 247 ) //293)
+                 {
+                     count++;
+                     if( count >50)
+                     {
+                         count=0;
+                         Kp--;
+                     }
+                 }else
+                 {
+                     count++;
+                     if( count >50)
+                     {
+                         count=0;
+                         Kp++;
+                     }
+                 }
+                 Drive_Plates = 1 ;
+                for (i=0; i<Kp ;i++)
+                {
+                delay_10us();
+                }
+                Drive_Plates = 0 ;
 
+                for( i=0; i< (256-Kp); i++ )
+                {
+                 delay_10us();
+                }
+             }
+         } else
+         {
+             Drive_Plates = 0 ;
+             delay_ms(100);
+         }
+         
             keyValue = ProcessButton();
              if( keyValue == BUTTON_SINGLE_CLICK )
              {
-                 Drive_Plates = ! Drive_Plates ;
+                 flagHeat = !flagHeat ;
+//              Drive_Plates = ! Drive_Plates ;
              } else if ( keyValue == BUTTON_DOUBLE_CLICK)
              {
                  break;
