@@ -354,18 +354,23 @@ void  ShutDownSystem()
  */
 void ProcessHeat()
 {
+    uint8 i ;
     uint16 adcValue;
     uint8  flagStop=0 ;  // when temperature rising to setting, = 1 ;
     uint32 countHeatTime = 0 ; // using this to limit the heat_time
                                // the current is huge, it is dangerous
-               
-    // to remember the Temp_setting
-    WriteEEprom ( TEMP_SETTING_EEPROM_LOCATION, levelTmpSetting ); // write the TempSetting in 0 location
-                                        // of EEPROM
+    uint8 Kp = 30 ;
+    uint8 count = 0 ;
     
+    
+    // to remember the Temp_setting
+    // write the TempSetting in 0 location of EEPROM
+    WriteEEprom ( TEMP_SETTING_EEPROM_LOCATION, levelTmpSetting );
+    
+#ifdef debug
     // for debug checking the process of EEPROM
     levelTmpSetting = ReadEEprom( TEMP_SETTING_EEPROM_LOCATION );
-    
+#endif    
     Drive_Plates = ON ;
 
     turnOffAllLed();  // erase the  trail of Led blink
@@ -379,6 +384,12 @@ void ProcessHeat()
          break;
      }
      
+     // if heating some time and the temperature is still not hight then 100'C
+     // means that maybe the thermocouple is not contact bowl well, so give out
+     // a alarm and stop heating
+     if( 1)
+     {}
+     
     HeatProcessLedShow(); 
 
     adcValue = GetAdcAD597Value( AD_AD597_CHANNEL  );
@@ -386,66 +397,118 @@ void ProcessHeat()
     switch ( levelTmpSetting )
     {
         case TEMPERATURE_LOW:
-            if ( adcValue > TEMPERATURE_LOW_AD_VALUE )
+            if ( adcValue < TEMPERATURE_LOW_AD_VALUE * 0.8)
             { 
-                flagStop = 1 ;
-                Led_LowBlue = ON ;
-             // when temperature raising to setting, maintain it
-             countHeatTime = timeSystemRun ;   
-             while ( (countHeatTime + 1000) > timeSystemRun )// 2000= 10S * 0.01
-             {
-                adcValue = GetAdcAD597Value( AD_AD597_CHANNEL  );
-                if ( adcValue > TEMPERATURE_LOW_AD_VALUE)
+                Drive_Plates = ON ;
+            }else
+            {
+                // 15? we need research for detail ,this is the scope of temp
+                // vary around the setting value
+                if (adcValue > TEMPERATURE_LOW_AD_VALUE + 15)  
                 {
-                 Drive_Plates = OFF ;
+                    count++;
+                    if( count > 50 )
+                    {
+                        count = 0 ;
+                        Kp--;      // temper > setting, decrease duty cycle
+                    }
                 }else
                 {
-                 Drive_Plates = ON ;
+                    count++ ;
+                    if (count >50)
+                    {
+                        count = 0 ;
+                        Kp++;     // temper < setting, increase duty cycle
+                    }
                 }
-             }  // end of while
-            } // end of  if ( adcValue ...)
+                // according the duty cycle heat the bowl
+                Drive_Plates = ON ;
+                for (i=0; i<Kp ;i++)
+                {
+                delay_10us();
+                }
+                Drive_Plates = 0 ;
+                for( i=0; i< (256-Kp); i++ )
+                {
+                 delay_10us();
+                }
+            }
+     
             break;
         case TEMPERATURE_MEDIUM:
-            if ( adcValue > TEMPERATURE_MEDIUM_AD_VALUE )
+            if ( adcValue < TEMPERATURE_MEDIUM_AD_VALUE * 0.8)
             { 
-                flagStop = 1 ;
-                Led_LowGreen = ON ;
-                Led_MediumGreen = ON ;
-             // when temperature raising to setting, maintain it
-             countHeatTime = timeSystemRun ;   
-             while ( (countHeatTime + 1000) > timeSystemRun )// 1000= 10S * 0.01
-             {
-                adcValue = GetAdcAD597Value( AD_AD597_CHANNEL  );
-                if ( adcValue > TEMPERATURE_MEDIUM_AD_VALUE)
+                Drive_Plates = ON ;
+            }else
+            {
+                // 15? we need research for detail ,this is the scope of temp
+                // vary around the setting value
+                if (adcValue > TEMPERATURE_MEDIUM_AD_VALUE + 15)  
                 {
-                 Drive_Plates = OFF ;
+                    count++;
+                    if( count > 50 )
+                    {
+                        count = 0 ;
+                        Kp--;      // temper > setting, decrease duty cycle
+                    }
                 }else
                 {
-                 Drive_Plates = ON ;
+                    count++ ;
+                    if (count >50)
+                    {
+                        count = 0 ;
+                        Kp++;     // temper < setting, increase duty cycle
+                    }
                 }
-             }  // end of while
+                // according the duty cycle heat the bowl
+                Drive_Plates = ON ;
+                for (i=0; i<Kp ;i++)
+                {
+                delay_10us();
+                }
+                Drive_Plates = 0 ;
+                for( i=0; i< (256-Kp); i++ )
+                {
+                 delay_10us();
+                }
             }
              break;
         case TEMPERATURE_HIGH:
-            if ( adcValue > TEMPERATURE_HIGH_AD_VALUE )
+            if ( adcValue < TEMPERATURE_HIGH_AD_VALUE * 0.8)
             { 
-                flagStop = 1 ;
-                Led_LowRed = ON ;
-                Led_MediumRed = ON ;
-                Led_HighRed = ON ;
-             // when temperature raising to setting, maintain it
-             countHeatTime = timeSystemRun ;   
-             while ( (countHeatTime + 1000) > timeSystemRun ) 
-             {
-                adcValue = GetAdcAD597Value( AD_AD597_CHANNEL  );
-                if ( adcValue > TEMPERATURE_HIGH_AD_VALUE)
+                Drive_Plates = ON ;
+            }else
+            {
+                // 15? we need research for detail ,this is the scope of temp
+                // vary around the setting value
+                if (adcValue > TEMPERATURE_HIGH_AD_VALUE + 15)  
                 {
-                 Drive_Plates = OFF ;
+                    count++;
+                    if( count > 50 )
+                    {
+                        count = 0 ;
+                        Kp--;      // temper > setting, decrease duty cycle
+                    }
                 }else
                 {
-                 Drive_Plates = ON ;
+                    count++ ;
+                    if (count >50)
+                    {
+                        count = 0 ;
+                        Kp++;     // temper < setting, increase duty cycle
+                    }
                 }
-             }  // end of while
+                // according the duty cycle heat the bowl
+                Drive_Plates = ON ;
+                for (i=0; i<Kp ;i++)
+                {
+                delay_10us();
+                }
+                Drive_Plates = 0 ;
+                for( i=0; i< (256-Kp); i++ )
+                {
+                 delay_10us();
+                }
             }
            break;
         default:
