@@ -1,4 +1,4 @@
-/*
+ /*
  * File: system.c  
  * Author: Lawrence
  * Created on September 18, 2015, 10:48 PM
@@ -12,10 +12,6 @@
  * Modified: 
  
  * Note:
- *  
- 
- *   test 2015-10-09 
- 
  
  */
 
@@ -355,6 +351,7 @@ void  ShutDownSystem()
 void ProcessHeat()
 {
     uint8 i ;
+    int8 keyValue;
     uint16 adcValue;
     uint8  flagStop=0 ;  // when temperature rising to setting, = 1 ;
     uint32 countHeatTime = 0 ; // using this to limit the heat_time
@@ -378,7 +375,7 @@ void ProcessHeat()
     while(TRUE)
   { 
      // if heating time > 15S, then stop heating, 
-     if (  (countHeatTime + 1500 ) < timeSystemRun )   //  1500 = 15S * 0.01
+     if (  (countHeatTime + 2500 ) < timeSystemRun )   //  2500 = 25S * 0.01
      {
          flagStop = 1 ;
          break;
@@ -389,9 +386,81 @@ void ProcessHeat()
      // a alarm and stop heating
      if( 1)
      {}
-     
-    HeatProcessLedShow(); 
 
+#ifdef debug
+              turnOffAllLed();        // turn off all RGB LED
+        if ( adcValue > 345 )   // ( 0.92/2.5 ) * 1024 = 367
+        {
+            Led_LowRed = OFF ;
+            Led_LowGreen = OFF ;
+            Led_LowGreen = OFF ;
+            Led_MediumRed = OFF ;
+            Led_MediumGreen = OFF ;
+            Led_MediumBlue = OFF ;
+
+            Led_HighRed = OFF ;
+            Led_HighGreen = OFF ;
+            Led_HighBlue = ON ;
+        }else if (adcValue >330) //( 0.82/2.5 ) * 1024 = 335
+        {
+            Led_LowRed = OFF ;
+            Led_LowGreen = OFF ;
+            Led_LowGreen = OFF ;
+            Led_MediumRed = OFF ;
+            Led_MediumGreen = OFF ;
+            Led_MediumBlue = OFF ;
+
+            Led_HighRed = OFF ;
+            Led_HighGreen = ON ;
+        } else if ( adcValue > 315 )  // ( 0.76/2.5 ) * 1024 = 310
+        {
+            Led_LowRed = OFF ;
+            Led_LowGreen = OFF ;
+            Led_LowBlue = OFF ;
+            Led_MediumRed = OFF ;
+            Led_MediumGreen = OFF ;
+            Led_MediumBlue = OFF ;
+
+            Led_HighRed = ON ;
+        } else if (adcValue >300 )  // ( 0.751/2.5 ) * 1024 = 307
+        {
+            Led_LowRed = OFF ;
+            Led_LowGreen = OFF ;
+            Led_LowBlue = OFF ;
+            Led_MediumRed = OFF ;
+            Led_MediumGreen = OFF ;
+            Led_MediumBlue = ON ;
+        }else if( adcValue > 285 ) // ( 0.731/2.5 ) * 1024 = 299
+
+        {
+            Led_LowRed = OFF ;
+            Led_LowGreen = OFF ;
+            Led_LowBlue = OFF ;
+            Led_MediumRed = OFF ;
+            Led_MediumGreen = ON ;
+        }else if(adcValue > 270)  // ( 0.667/2.5 ) * 1024 = 272
+        {
+            Led_LowRed = OFF ;
+            Led_LowGreen = OFF ;
+            Led_LowBlue = OFF ;
+            Led_MediumRed = ON ;
+        }else if(adcValue> 255)   // ( 0.625/2.5 ) * 1024 = 255
+        {
+            Led_LowRed = OFF ;
+            Led_LowGreen = OFF ;
+            Led_LowBlue = ON ;
+        }else if (adcValue> 240)   // ( 0.623/2.5 ) * 1024 = 254
+        {
+            Led_LowRed = OFF ;
+            Led_LowGreen = ON ;
+            Led_LowBlue = OFF ;
+        }else
+        {
+            Led_LowRed = ON ;
+        }
+#else
+    HeatProcessLedShow(); 
+#endif
     adcValue = GetAdcAD597Value( AD_AD597_CHANNEL  );
 
     switch ( levelTmpSetting )
@@ -518,9 +587,21 @@ void ProcessHeat()
     if ( flagStop )
     {
       break;   // break while( TRUE )
+    }
+
+    keyValue = ProcessButton();
+    if( keyValue == BUTTON_SINGLE_CLICK )
+     {
+        flagS2KeyPushed = 0 ;  // clear button_press flag this time
+        break;  // should be halt heating for some confirming things.
+     } else if ( keyValue == BUTTON_DOUBLE_CLICK)
+        {
+            flagS2KeyPushed = 0 ;// clear button_press flag this time
+            break;
+        }
+  
    }
-  }
-    // clear the 
+    // clear the heating
     Drive_Plates = OFF ;
 }
 
