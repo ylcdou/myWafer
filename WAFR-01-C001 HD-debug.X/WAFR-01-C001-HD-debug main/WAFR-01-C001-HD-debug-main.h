@@ -51,7 +51,9 @@
 #define AD_VREF 3      // this is the real VREF+ it is 2.5V   
 #define AD_BAT_CHANNEL  4
 
-
+#define debug
+//#define Check_Battery_ability
+ #define Check_Temp_AD597output
 
 #endif	/* _WAFER_H_ */
 
