@@ -188,25 +188,31 @@
     
 #ifdef Check_Temp_AD597output    
     uint8 flagHeat = 0 ;
-    uint8  Kp=30 ;
     uint8 count=0 ;
+    int16 Kp = 64 ; 
+    int16 temp;
     while(1)
     {
          //get the Temp from voltage from AD597output
-         // using the data check with iron solder station
-        //   350 ( 176 'C)    0.623  V
-        //   356 ( 180 'C)    0.625  V
-        //   370 ( 187 'C)    0.667  V
-        //   400 ( 204 'C)    0.735  V
-        //   410 ( 210 'C)    0.731  V
-        //   420 ( 216 'C)    0.76   V
-        //   450 ( 232 'C)    0.82   V
-        //   500 ( 260 'C)    0.92   V
-    
+         // using the data check with thermometer 
+        //    iron station  thermometer      AD597 Output
+        //   350 ( 176 'C)                    0.623  V
+        //   356 ( 180 'C)                    0.625  V
+        //   370 ( 187 'C)                    0.667  V
+        //                      88'C          0.722  V
+        //   400 ( 204 'C)                    0.735  V
+        //   410 ( 210 'C)                    0.731  V
+        //   420 ( 216 'C)                    0.76   V
+        //   450 ( 232 'C)                    0.82   V
+        //   500 ( 260 'C)                    0.92   V
+        //                      114'C         0.86   V
+        //                      185'C         1.42V
+        //                      190'c         1.45V
+        //                      210'C         1.5V
         adcValue = GetAdcAD597Value( AD_AD597_CHANNEL  );
         
          turnOffAllLed();        // turn off all RGB LED
-        if ( adcValue > 345 )   // ( 0.92/2.5 ) * 1024 = 367
+        if ( adcValue > 630 )   // ( 0.92/2.5 ) * 1024 = 367
         {
             Led_LowRed = OFF ;
             Led_LowGreen = OFF ;
@@ -218,7 +224,7 @@
             Led_HighRed = OFF ;
             Led_HighGreen = OFF ;
             Led_HighBlue = ON ;
-        }else if (adcValue >330) //( 0.82/2.5 ) * 1024 = 335
+        }else if (adcValue >600) //( 0.82/2.5 ) * 1024 = 335
         {
             Led_LowRed = OFF ;
             Led_LowGreen = OFF ;
@@ -229,7 +235,7 @@
 
             Led_HighRed = OFF ;
             Led_HighGreen = ON ;
-        } else if ( adcValue > 315 )  // ( 0.76/2.5 ) * 1024 = 310
+        } else if ( adcValue > 570 )  // ( 0.76/2.5 ) * 1024 = 310
         {
             Led_LowRed = OFF ;
             Led_LowGreen = OFF ;
@@ -239,7 +245,7 @@
             Led_MediumBlue = OFF ;
 
             Led_HighRed = ON ;
-        } else if (adcValue >300 )  // ( 0.751/2.5 ) * 1024 = 307
+        } else if (adcValue >540 )  // ( 0.751/2.5 ) * 1024 = 307
         {
             Led_LowRed = OFF ;
             Led_LowGreen = OFF ;
@@ -247,7 +253,7 @@
             Led_MediumRed = OFF ;
             Led_MediumGreen = OFF ;
             Led_MediumBlue = ON ;
-        }else if( adcValue > 285 ) // ( 0.731/2.5 ) * 1024 = 299
+        }else if( adcValue > 510 ) // ( 0.731/2.5 ) * 1024 = 299
 
         {
             Led_LowRed = OFF ;
@@ -255,18 +261,18 @@
             Led_LowBlue = OFF ;
             Led_MediumRed = OFF ;
             Led_MediumGreen = ON ;
-        }else if(adcValue > 270)  // ( 0.667/2.5 ) * 1024 = 272
+        }else if(adcValue > 480)  // ( 0.667/2.5 ) * 1024 = 272
         {
             Led_LowRed = OFF ;
             Led_LowGreen = OFF ;
             Led_LowBlue = OFF ;
             Led_MediumRed = ON ;
-        }else if(adcValue> 255)   // ( 0.625/2.5 ) * 1024 = 255
+        }else if(adcValue> 450)   // ( 0.625/2.5 ) * 1024 = 255
         {
             Led_LowRed = OFF ;
             Led_LowGreen = OFF ;
             Led_LowBlue = ON ;
-        }else if (adcValue> 240)   // ( 0.623/2.5 ) * 1024 = 254
+        }else if (adcValue> 420)   // ( 0.623/2.5 ) * 1024 = 254
         {
             Led_LowRed = OFF ;
             Led_LowGreen = ON ;
@@ -276,59 +282,73 @@
             Led_LowRed = ON ;
         }
   
+         
          if (flagHeat)
          {
-             if (adcValue < 192)  // 270 )    // ( 0.731/2.5 ) * 1024 = 299
-             {                        // 299*0.8 = 240 , that is reach 80%
-                                     // start adjust the Kp
-                 Drive_Plates = 1 ;
-             }else
+             // Uo = 64 ;
+             // Dt =  573 - adcValue
+            
+             temp = 573- adcValue ;
+             temp = temp * 0.4 ;
+             Kp = 128 + temp;
+             
+             if ( Kp > 255 )
              {
-                 if (adcValue > 247 ) //293)
-                 {
-                     count++;
-                     if( count >50)
-                     {
-                         count=0;
-                         Kp--;
-                     }
-                 }else
-                 {
-                     count++;
-                     if( count >50)
-                     {
-                         count=0;
-                         Kp++;
-                     }
-                 }
-                 Drive_Plates = 1 ;
+                 Kp = 255 ;
+             }
+             
+             temp= 0 ;
+             
+                Drive_Plates = 1 ;
+
                 for (i=0; i<Kp ;i++)
                 {
-                delay_10us();
+                  delay_10us();
                 }
-                Drive_Plates = 0 ;
 
+                Drive_Plates = 0 ;
                 for( i=0; i< (256-Kp); i++ )
                 {
                  delay_10us();
                 }
-             }
          } else
          {
              Drive_Plates = 0 ;
              delay_ms(100);
          }
          
-            keyValue = ProcessButton();
+         /* using half drive heat to see what temperature it can get */
+         /*
+         if (flagHeat)
+         {
+                
+               Drive_Plates = 1 ;
+                for (i=0; i<Kp ;i++)
+                {
+                delay_10us();
+                }
+                Drive_Plates = 0 ;
+
+                for( i=128; i< (256-Kp); i++ )
+                {
+                 delay_10us();
+                }
+         }
+         
+         */
+             keyValue = ProcessButton();
              if( keyValue == BUTTON_SINGLE_CLICK )
              {
-                 flagHeat = !flagHeat ;
-//              Drive_Plates = ! Drive_Plates ;
+              Drive_Plates = OFF ;
+              flagHeat = !flagHeat ;              
              } else if ( keyValue == BUTTON_DOUBLE_CLICK)
              {
+              Drive_Plates = OFF ;
+              flagHeat = !flagHeat ;              
                  break;
-             }
-    }
+             }    
+      }   // end of if(flagHeat)
+         
     
 #endif    
     
