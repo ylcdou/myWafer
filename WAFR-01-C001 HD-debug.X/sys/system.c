@@ -43,7 +43,8 @@ void InitializeOscillator()
 
 /*
  *  Initialize the Interrupt
-  *    
+ *  Tell how many interrupt this system is using
+ *    
  */
 void InitializeInterrupts()
 {
@@ -110,22 +111,20 @@ void InitializeTimer0()
 {
     T0CONbits.T08BIT = 0 ;  // Timer0 8-Bit/16Bit Control bit; 0 = 16-bit
     T0CONbits.T0CS   = 0 ;  // Internal clock
-    T0CONbits.PSA    = 1 ;  // Timer0 Prescaler is not assigned , Timer0 clock input bypasses prescaler
+    T0CONbits.PSA    = 1 ;  // Timer0 Pre_scaler is not assigned , Timer0 clock
+                            // input bypasses pre_scaler
 
     TMR0H = (65536-40000)/256;   // 10ms once Timer0 interrupt
     TMR0L = (65536-40000)%256 ;
 
     T0CONbits.TMR0ON = 1 ;  // Timer0 ON/Off Control bit 1=Enables
-
-    
+   
     INTCONbits.TMR0IF = 0 ;     // Clear timer0 overflow interrupt flag
     INTCONbits.TMR0IE = TRUE;   // Enable the TMR0 overflow interrupt
-  
     
-    INTCONbits.PEIE = 1 ;  // periphyrel interrupt enable
-//    // Global Interrupt Enable
-//    INTCONbits.GIE = TRUE;
-
+    INTCONbits.PEIE = 1 ;  // peripheral interrupt enable
+   
+    // INTCONbits.GIE = TRUE; // Global Interrupt Enable
 }
 
 /*
@@ -155,19 +154,19 @@ void InitializeTimer1()
 
 /*
  * Initialize InitializeINT0
-* Note:
+ * Note:
  *  On the board, there is button of S2 , it is the button:
  *     to turn on the system:  hardware
- *     to turn off the system: firmware check it ,and when it pushed lasting >3 second
- *                             then turn off system
- *      This button using INT0 interrupt.
+ *     to turn off the system: firmware check it ,and when it pushed lasting
+ *     >6 second then turn off system
+ *  This button using INT0 interrupt.
  */
 void InitializeINT0()
 {
-    INTCON2bits.INTEDG0 = 0 ;     // External Interrupt 0 Edge Select bit: 0 = on falling edge
-    INTCONbits.INT0IF = 0 ;       // INT0 External Interrupt Flag     bit 1 = occurred
-    
-    INTCONbits.INT0IE = 1 ;        // INT0 External interrupt Enable  bit 1 = Enable
+    INTCON2bits.INTEDG0 = 0 ;// External Interrupt 0 Edge Select bit:
+                             //0 = on falling edge
+    INTCONbits.INT0IF = 0 ;  // INT0 External Interrupt Flag   bit 1 = occurred
+    INTCONbits.INT0IE = 1 ;  // INT0 External interrupt Enable bit 1 = Enable
 }
 
 /*
@@ -202,8 +201,13 @@ void InitializeINT0()
  *    1 AD597 input signal respond the temperature checked
  *    2 Battery voltage 
  * 
+ *  // AD597_CHANNEL        0
+ *   // BAT_OK_CHANNEL       1
+ *   // AD_VREF              3  // this is the real VREF+ it is 2.5V    
+ *   // AD_BAT_CHANNEL       4
+ *
  */
-void InitializeAD()
+void InitializeADC()
 {
   /*        ADCON1: A/D Control register1;   
    *  U-0 U-0  R/W-0  R/W-0  R/W-0   R/W-q   R/W-q  R/W-q 
@@ -231,14 +235,14 @@ void InitializeAD()
    *                ACQT<2:0>: A/D Acquisition Time Select bits
    *                ADCS<2:0>  A/D Conversion Clock Select bits                  
    */
-  ADCON2bits.ADCS2 = 0 ;  // 010 = Fosc/32 
-  ADCON2bits.ADCS1 = 1 ;
+  ADCON2bits.ADCS2 = 0 ;  // 000 = Fosc/2 
+  ADCON2bits.ADCS1 = 0 ;
   ADCON2bits.ADCS0 = 0 ;
   
    ADCON2bits.ADFM = 1 ;  // Right justified 
    
-   ADCON2bits.ACQT2 = 1;  // 110=16 TAD
-   ADCON2bits.ACQT1 = 1;
+   ADCON2bits.ACQT2 = 0;  // 110=16 TAD
+   ADCON2bits.ACQT1 = 1;  // 010=4  TAD
    ADCON2bits.ACQT0 = 0;
 
    /*   ADCON0: A/D CONTROL REGISTER 0
@@ -250,7 +254,7 @@ void InitializeAD()
     *                                                          1=A/D Enabled
     *                                                          0=A/D Disabled
     */
-   ADCON0bits.ADON = 1 ;   // Enable A/D
+   ADCON0bits.ADON = ON ;   // Enable A/D
 }
 
 /* AD_Converter
@@ -259,8 +263,21 @@ void InitializeAD()
  * 
  * Note:
  *     Here use the Polling method for result of AD conversion
+ *     
+ *     every  ADCON0bits.ADON = 1 will using a lot of time 
+ *            So for some critical AD, we should be always let ADON = 1 ;
+ *     So this function is not used here, instead of this , we use two other
+ *     function to get the ADC_Value:
+ *     void  GetBatteryValue()
+ *     void  GetTemperatureValue()
+ * 
+ *    But this function would be more normally and easy to understand and 
+ *    easy to portable to other system, if the system have enough time
+ *    to run AD. 
  * 
  */
+
+/*
 uint16 AD_Converter( int8 channelNumber)
 {
     uint16 AD_Result ;          //  save the value of AD results for return ;
@@ -273,7 +290,7 @@ uint16 AD_Converter( int8 channelNumber)
     *                                                          1=A/D Enabled
     *                                                          0=A/D Disabled
     */
-    ADCON0 =  ((channelNumber & 0x07) << 2) | 0x01; // select AD channel
+  /*  ADCON0 =  ((channelNumber & 0x07) << 2) | 0x01; // select AD channel
                                                     // |0x01 to always enable AD
                                                     //  = ADCON0bits.ADON=1
     
@@ -290,11 +307,177 @@ uint16 AD_Converter( int8 channelNumber)
     AD_Result =( ADRESH << 8 ) | ADRESL ;   // save AD_result in uint16 variable      
     
     return (AD_Result);
+}
+*/
+
+uint16 ADC_ConvertTemperature()
+{
+    /*   ADCON0: A/D CONTROL REGISTER 0
+    *  U-0  U-0 R/W-0   R/W-0   R/W-0   R/W-0   R/W-0          R/W-0
+    * --    --  CHS3    CHS2    CHS1    CHS0    GO/ (/DONE)    ADON
+    *           CHS<3:0> Channel Select bits
+    *                                           1=A/D in process
+    *                                           0=A/D idle
+    *                                                          1=A/D Enabled
+    *                                                          0=A/D Disabled
+    */
+    uint16 adcValue ;
+
+    // select AD channel
+    ADCON0bits.CHS = AD_AD597_CHANNEL;   // this is for temperature checking
+    // start AD
+    ADCON0bits.GO = 1;                      
+    // wait for AD 
+    while( ADCON0bits.GODONE );            
+    // clear AD converter interrupt flag bit
+    PIR1bits.ADIF = 0;                     
+    // save AD_result in uint16 variable
+    adcValue = ( ADRESH << 8 ) | ADRESL;
+
+    return ( adcValue );
+}
+
+/* GetTemperatureValue
+ * Comments:
+ *     using 8 times AD_convert value to get a average value of temperature
+ * Input :  NONE 
+ * Output: the temperature ADC_value of 8 timers average
+ */
+uint16 GetTemperatureValue()
+{
+    uint16 adcValue ;
     
+    adcValue = ADC_ConvertTemperature();
+
+    /* temperatureValue * 7 + this time value --> sum of 8 times ADC */
+    adcValueHelper =( temperatureValue <<3 ) - temperatureValue +adcValue ;
+    
+    // then /8 to get the average
+    //temperatureValue = ( adcValueHelper >> 3 ) + 0x0003
+    return ( ( adcValueHelper >> 3 ) + 0x0003 )  ;  
+    /*                   
+     *          adcValueHelper/8     +  middle value of rounded 3 bit 
+     */
+}
+
+/* AD_Converter
+ * Comments:
+ *     Select Battery channel and get A/D converter value, 
+ * Note:
+ *     Here use the Polling method for result of AD conversion
+ */
+uint16 ADC_ConvertBattery()
+{
+    /*   ADCON0: A/D CONTROL REGISTER 0
+    *  U-0  U-0 R/W-0   R/W-0   R/W-0   R/W-0   R/W-0          R/W-0
+    * --    --  CHS3    CHS2    CHS1    CHS0    GO/ (/DONE)    ADON
+    *           CHS<3:0> Channel Select bits
+    *                                           1=A/D in process
+    *                                           0=A/D idle
+    *                                                          1=A/D Enabled
+    *                                                          0=A/D Disabled
+    */
+    uint16 adcValue ;
+
+    // select AD channel
+    ADCON0bits.CHS = AD_BAT_CHANNEL;
+    // start AD
+    ADCON0bits.GO = 1;                      
+    // wait for AD 
+    while( ADCON0bits.GODONE );            
+    // clear AD converter interrupt flag bit
+    PIR1bits.ADIF = 0;                     
+    // save AD_result in uint16 variable
+    adcValue = ( ADRESH << 8 ) | ADRESL;
+    
+    return ( adcValue) ;
+}
+
+/* GetBatteryValue
+ * Comments:
+ *     using 8 times AD_convert value to get a average value of temperature
+ * Input :  NONE 
+ * Output: the Battery voltage ADC_value of 8 timers average
+ */
+uint16 GetBatteryValue()
+{
+    uint16 adcValue ;
+    
+    adcValue = ADC_ConvertBattery();
+
+    /* temperatureValue * 7 + this time value --> sum of 8 times ADC */
+    adcValueHelper =( batteryValue <<3 ) - batteryValue +adcValue ;
+    
+    // then /8 to get the average
+    //batteryValue = ( adcValueHelper >> 3 ) + 0x0003
+    return ( ( adcValueHelper >> 3 ) + 0x0003 )  ;  
+    /*                   
+     *          adcValueHelper/8     +  middle value of rounded 3 bit 
+     */
 }
 
 
-/*InitializeHardware
+/* AD_Converter
+ * Comments:
+ *     Select Battery channel and get A/D converter value, 
+ * Note:
+ *     Here use the Polling method for result of AD conversion
+ */
+uint16 ADC_ConvertBatteryCharge()
+{
+    /*   ADCON0: A/D CONTROL REGISTER 0
+    *  U-0  U-0 R/W-0   R/W-0   R/W-0   R/W-0   R/W-0          R/W-0
+    * --    --  CHS3    CHS2    CHS1    CHS0    GO/ (/DONE)    ADON
+    *           CHS<3:0> Channel Select bits
+    *                                           1=A/D in process
+    *                                           0=A/D idle
+    *                                                          1=A/D Enabled
+    *                                                          0=A/D Disabled
+    */
+    uint16 adcValue ;
+
+    // select AD channel
+    ADCON0bits.CHS = AD_BAT_OK_CHANNEL;
+    // start AD
+    ADCON0bits.GO = 1;                      
+    // wait for AD 
+    while( ADCON0bits.GODONE );            
+    // clear AD converter interrupt flag bit
+    PIR1bits.ADIF = 0;                     
+    // save AD_result in uint16 variable
+    adcValue = ( ADRESH << 8 ) | ADRESL;
+    
+    return ( adcValue) ;
+}
+
+/* AD_Converter
+ * Comments:
+ *     Select Battery_charger channel and get A/D converter value, 
+ * Note:
+ *     Here use the Polling method for result of AD conversion
+ */
+uint16 GetBatteryChargeValue()
+{
+    uint16 adcValue ;
+    
+    adcValue = ADC_ConvertBatteryCharge();
+
+    /* temperatureValue * 7 + this time value --> sum of 8 times ADC */
+    adcValueHelper =( batteryChargeValue <<3 ) - batteryChargeValue +adcValue ;
+    
+    // then /8 to get the average
+    //batteryChargeValue = ( adcValueHelper >> 3 ) + 0x0003
+    return ( ( adcValueHelper >> 3 ) + 0x0003 )  ;  
+    /*                   
+     *          adcValueHelper/8     +  middle value of rounded 3 bit 
+     */
+}
+
+
+
+
+
+/*InitializeWafer
  * 
  * comment:  
  *    read the EEprom to get the status ( levelTempSetting ) user set last time
@@ -302,12 +485,45 @@ uint16 AD_Converter( int8 channelNumber)
  * Note:
  * 
  */
-void   InitializeHardware()
+void   InitializeWafer()
 {
-        // indicate the device status remembered in EEprom
-           // ...
-        levelTmpSetting = 1 ;
+    // indicate the device status remembered in EEprom
+    // ...
+     levelTmpSetting = 1 ;
 
+    // Maintain the System Power ON
+    Power_On = YES;
+    // turn off the heating drive !!! 
+    Drive_Plates = OFF ;
+
+    // System running time, it depend on the time Timer0 interrupt once
+    systemRunCount = 0;   
+    keyPowerDwellCount = 0;
+    keyPowerFlag = 0;
+    // this needs to be super high so the first push doesn't register as a double
+    keyPowerLastPushTimer = 0x7fffffff;
+    keyPowerCurrentPushTimer = 0;
+    keyPowerDebounceCount = 0;
+    buttonLatencyCount = 0;
+
+    temperatureTarget = TEMPERATURE_LOW_ADC;
+    currentState = STATE_STARTUP;
+    lastState = STATE_WAIT;
+    stateChange = FALSE;
+    batteryState = BATTERY_LOW;
+    
+    // Initialize the battery's capacitor value 
+    // because of the average calculating need some time 
+    // So, here give the array a low battery capacitor value
+    batteryValue = 816;      // 3.12V
+    temperatureValue = 0;
+
+    adcValueHelper = 0 ;
+    batteryValue= 816 ;      // 3.12V; 
+    temperatureValue = 0  ;
+    batteryChargeValue = 0 ;
+
+        
         LevelTmpSetShow ();
 }
   
@@ -371,11 +587,11 @@ void ProcessHeat()
     Drive_Plates = ON ;
 
     turnOffAllLed();  // erase the  trail of Led blink
-    countHeatTime = timeSystemRun ; 
+    countHeatTime = systemRunCount ; 
     while(TRUE)
   { 
      // if heating time > 15S, then stop heating, 
-     if (  (countHeatTime + 2500 ) < timeSystemRun )   //  2500 = 25S * 0.01
+     if (  (countHeatTime + 2500 ) < systemRunCount )   //  2500 = 25S * 0.01
      {
          flagStop = 1 ;
          break;
@@ -389,7 +605,8 @@ void ProcessHeat()
 
 #ifdef debug
               turnOffAllLed();        // turn off all RGB LED
-        if ( adcValue > 345 )   // ( 0.92/2.5 ) * 1024 = 367
+              temperatureValue = GetTemperatureValue();
+       if ( temperatureValue > 345 )   // ( 0.92/2.5 ) * 1024 = 367
         {
             Led_LowRed = OFF ;
             Led_LowGreen = OFF ;
@@ -401,7 +618,7 @@ void ProcessHeat()
             Led_HighRed = OFF ;
             Led_HighGreen = OFF ;
             Led_HighBlue = ON ;
-        }else if (adcValue >330) //( 0.82/2.5 ) * 1024 = 335
+        }else if (temperatureValue >330) //( 0.82/2.5 ) * 1024 = 335
         {
             Led_LowRed = OFF ;
             Led_LowGreen = OFF ;
@@ -412,7 +629,7 @@ void ProcessHeat()
 
             Led_HighRed = OFF ;
             Led_HighGreen = ON ;
-        } else if ( adcValue > 315 )  // ( 0.76/2.5 ) * 1024 = 310
+        } else if ( temperatureValue > 315 )  // ( 0.76/2.5 ) * 1024 = 310
         {
             Led_LowRed = OFF ;
             Led_LowGreen = OFF ;
@@ -422,7 +639,7 @@ void ProcessHeat()
             Led_MediumBlue = OFF ;
 
             Led_HighRed = ON ;
-        } else if (adcValue >300 )  // ( 0.751/2.5 ) * 1024 = 307
+        } else if (temperatureValue >300 )  // ( 0.751/2.5 ) * 1024 = 307
         {
             Led_LowRed = OFF ;
             Led_LowGreen = OFF ;
@@ -430,7 +647,7 @@ void ProcessHeat()
             Led_MediumRed = OFF ;
             Led_MediumGreen = OFF ;
             Led_MediumBlue = ON ;
-        }else if( adcValue > 285 ) // ( 0.731/2.5 ) * 1024 = 299
+        }else if( temperatureValue > 285 ) // ( 0.731/2.5 ) * 1024 = 299
 
         {
             Led_LowRed = OFF ;
@@ -444,12 +661,12 @@ void ProcessHeat()
             Led_LowGreen = OFF ;
             Led_LowBlue = OFF ;
             Led_MediumRed = ON ;
-        }else if(adcValue> 255)   // ( 0.625/2.5 ) * 1024 = 255
+        }else if(temperatureValue> 255)   // ( 0.625/2.5 ) * 1024 = 255
         {
             Led_LowRed = OFF ;
             Led_LowGreen = OFF ;
             Led_LowBlue = ON ;
-        }else if (adcValue> 240)   // ( 0.623/2.5 ) * 1024 = 254
+        }else if (temperatureValue > 240)   // ( 0.623/2.5 ) * 1024 = 254
         {
             Led_LowRed = OFF ;
             Led_LowGreen = ON ;
@@ -458,22 +675,23 @@ void ProcessHeat()
         {
             Led_LowRed = ON ;
         }
+              
 #else
     HeatProcessLedShow(); 
 #endif
-    adcValue = GetAdcAD597Value( AD_AD597_CHANNEL  );
+    temperatureValue = GetTemperatureValue();
 
     switch ( levelTmpSetting )
     {
         case TEMPERATURE_LOW:
-            if ( adcValue < TEMPERATURE_LOW_AD_VALUE * 0.8)
+            if ( temperatureValue < TEMPERATURE_LOW_ADC * 0.8)
             { 
                 Drive_Plates = ON ;
             }else
             {
                 // 15? we need research for detail ,this is the scope of temp
                 // vary around the setting value
-                if (adcValue > TEMPERATURE_LOW_AD_VALUE + 15)  
+                if (temperatureValue > TEMPERATURE_LOW_ADC + 15)  
                 {
                     count++;
                     if( count > 50 )
@@ -505,14 +723,14 @@ void ProcessHeat()
      
             break;
         case TEMPERATURE_MEDIUM:
-            if ( adcValue < TEMPERATURE_MEDIUM_AD_VALUE * 0.8)
+            if ( temperatureValue < TEMPERATURE_MEDIUM_ADC * 0.8)
             { 
                 Drive_Plates = ON ;
             }else
             {
                 // 15? we need research for detail ,this is the scope of temp
                 // vary around the setting value
-                if (adcValue > TEMPERATURE_MEDIUM_AD_VALUE + 15)  
+                if ( temperatureValue > TEMPERATURE_MEDIUM_ADC + 15)  
                 {
                     count++;
                     if( count > 50 )
@@ -543,14 +761,14 @@ void ProcessHeat()
             }
              break;
         case TEMPERATURE_HIGH:
-            if ( adcValue < TEMPERATURE_HIGH_AD_VALUE * 0.8)
+            if ( temperatureValue < TEMPERATURE_HIGH_ADC * 0.8)
             { 
                 Drive_Plates = ON ;
             }else
             {
                 // 15? we need research for detail ,this is the scope of temp
                 // vary around the setting value
-                if (adcValue > TEMPERATURE_HIGH_AD_VALUE + 15)  
+                if ( temperatureValue > TEMPERATURE_HIGH_ADC + 15)  
                 {
                     count++;
                     if( count > 50 )
@@ -592,114 +810,17 @@ void ProcessHeat()
     keyValue = ProcessButton();
     if( keyValue == BUTTON_SINGLE_CLICK )
      {
-        flagS2KeyPushed = 0 ;  // clear button_press flag this time
+        keyPowerFlag = 0 ;  // clear button_press flag this time
         break;  // should be halt heating for some confirming things.
      } else if ( keyValue == BUTTON_DOUBLE_CLICK)
         {
-            flagS2KeyPushed = 0 ;// clear button_press flag this time
+            keyPowerFlag = 0 ;// clear button_press flag this time
             break;
         }
   
    }
     // clear the heating
     Drive_Plates = OFF ;
-}
-
-
-/* 
- *  GetADC_Value
- *  comment: using  AD_AVERAGE_NUMBER time AD_converter average result as the
- *           real adcValue
- * 
- *  input parameter:  channelNumber
- * 
- *  output parameter:  the average value of 10 times detect value
- * 
- * Note:  This is only for check Battery's voltage
- * 
- */
-uint16 GetAdcBatValue(uint8 channelNumber)   // get adcValue from 10 times average.
-{
-    uint8 i;
-    uint16 temp = 0 ;
-    for ( i=0; i< ( AD_AVERAGE_NUMBER-1) ;i++)   // shift AD_AVERAGE_NUMBER-1 bit
-    {
-        adcBatValue[i] = adcBatValue[i+1] ;
-    }
-    
-    adcBatValue[AD_AVERAGE_NUMBER-1]  = AD_Converter( channelNumber ) ;  // get once AD_result
-    
-    for ( i=0 ;i<AD_AVERAGE_NUMBER ;i++)
-    {
-        temp = temp + adcBatValue[i] ;
-    }
-    
-    return ( temp/AD_AVERAGE_NUMBER );
-}
-
-
-/* 
- *  GetADC_Value
- *  comment: using  AD_AVERAGE_NUMBER time AD_converter average result as the
- *           real adcValue
- * 
- *  input parameter:  channelNumber
- * 
- *  output parameter:  the average value of 10 times detect value
- * 
- * Note: This is for check the output of AD597
- * 
- */
-uint16 GetAdcAD597Value(uint8 channelNumber)   // get adcValue from 10 times average.
-{
-    uint8 i;
-    uint16 temp = 0 ;
-    
-    
-    for ( i=0; i< ( AD_AVERAGE_NUMBER-1) ;i++)   // shift AD_AVERAGE_NUMBER-1 bit
-    {
-        adcAD597Value[i] = adcAD597Value[i+1] ;
-    }
-    
-    adcAD597Value[AD_AVERAGE_NUMBER-1]  = AD_Converter( channelNumber ) ;  // get once AD_result
-
-    for ( i=0 ;i<AD_AVERAGE_NUMBER ;i++)
-    {
-        temp += adcAD597Value[i] ;
-    }
-    
-    return ( temp/AD_AVERAGE_NUMBER );
-}
-
-/* 
- *  GetADC_Value
- *  comment: using  AD_AVERAGE_NUMBER time AD_converter average result as the
- *           real adcValue
- * 
- *  input parameter:  channelNumber
- * 
- *  output parameter:  the average value of 10 times detect value
- * 
- * Note: This is really only for charge battery STAT of MCP73831 output 
- * 
- */
-uint16 GetAdcChargBatValue(uint8 channelNumber)   // get adcValue from 10 times average.
-{
-    uint8 i;
-    uint16 temp = 0 ;
-    for ( i=0; i< ( AD_AVERAGE_NUMBER-1) ;i++)   // shift AD_AVERAGE_NUMBER-1 bit
-    {
-        adcChargeStatValue[i] = adcChargeStatValue[i+1] ;
-    }
-    
-    adcChargeStatValue[AD_AVERAGE_NUMBER-1]  = AD_Converter( channelNumber ) ;  // get once AD_result
-    
-    for ( i=0 ;i<AD_AVERAGE_NUMBER ;i++)
-    {
-        temp = temp + adcChargeStatValue[i] ;
-    }
-    
-    return ( temp/AD_AVERAGE_NUMBER );
 }
 
 //*****************************************************************************
