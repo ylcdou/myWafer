@@ -26,14 +26,11 @@ void interrupt ISR()
     if ( INTCONbits.TMR0IE  && INTCONbits.TMR0IF)   
     {
         INTCONbits.TMR0IF = 0; 
-        timer0Count++ ;
-        timeSystemRun++   ;    // Note: it is 0.01S=10mS  +1
+        keyPowerDwellCount++ ;  // for calculate the Key_Push_Time
+        buttonLatencyCount++ ;  // for delay check the key_Pushed,
+        stateTimer++ ;
+        systemRunCount++   ;    // Note: it is 0.01S=10mS  +1
                                // this is a uint32, it can run 497 days.
-        if (timer0Count == 50)    // 0.5 Second = 50 * 10ms
-        {
-            timer0Count = 0 ;
-            timerHalfSecond ++ ;  // Note: it is 0.5S +1 
-        }
         
         TMR0H = (65536-40000)/256;   // 10ms one interrupt
         TMR0L = (65536-40000)%256 ;
@@ -46,7 +43,7 @@ void interrupt ISR()
      INTCONbits.INT0IF = 0 ;
 
      // two interrupt time <20ms, it was a button jitter 
-     if (  (timeSystemRun - pushButtonJitterTime) < 2 ){
+     if (  (systemRunCount - keyPowerDebounceCount) < DEBOUNCE_COUNT ){
          // nothing to do , it was a button jitter
      }else{
             if ( !Key_Power )    
@@ -58,14 +55,18 @@ void interrupt ISR()
             {
                INTCON2bits.INTEDG0 = 0 ; // External Interrupt 0 Edge Select 
                                          // bit: 0 = on falling edge
-               S2KeyPushTime = timerHalfSecond;// S2KeyPushTime = time of S2 be pushed 
-               flagS2KeyPushed = 1  ;
 
-               buttonPushTimeStop = timeSystemRun ; // record this button pushed time
-               // Led3Red   = 0 ;   // indicate the S2 being released
+               keyPowerFlag = TRUE  ;
+
+               keyPowerLastPushTimer = keyPowerCurrentPushTimer;
+               keyPowerCurrentPushTimer = systemRunCount;
+               keyPowerThisDwell = keyPowerDwellCount;
             } // end of else 
-            pushButtonJitterTime = timeSystemRun ;  // record the last interrupt
+            // and edge of push clear it = 0, 
+            // in the upper else , push_last time = keyPowerDwellcount
+            keyPowerDwellCount = 0 ; 
      }  // end of else{
+            keyPowerDebounceCount = systemRunCount ;// record the last interrupt
   }
     
 
