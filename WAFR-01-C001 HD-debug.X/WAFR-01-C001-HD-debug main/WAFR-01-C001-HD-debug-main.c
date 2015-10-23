@@ -14,12 +14,6 @@
  *  * Modified: 
  *  * Note:
  * 
- *
- *  
- * 
- * 
- *  for checking GitHub
- *  and then check in GitHub
  *  
  */
 
@@ -37,7 +31,7 @@
 
  int main(int argc, char** argv)
 {
-    unsigned int i;
+    int16 i;
     int8 keyValue;     // for S2 button using:
                        // keyValue = 0 --->  no button pushed
                        //          = 1 --->  short pushed 
@@ -51,8 +45,16 @@
     InitializeOscillator();
     /* Initialize I/O and Peripherals for application */
     InitializePinmux();
-    // Maintain the System Power ON
+
+    InitializeWafer();   // initial all the variable used in wafer.
+
+    // Maintain the System Power ON , it has done in InitializeWafer
+    // Now do it again, show it is very important in this system
     Power_On = YES;
+    /* turn off the heating drive !!! */
+    Drive_Plates = OFF ;  
+    /* OK , it is safe now */
+
     /* Timer0 initial function, the system clock uses it 
      * ( like the Arduino 32 clock)
      * and the general clock uses it
@@ -69,13 +71,10 @@
     /* Initialize the AD system,
      *  in this system, we only using the Polling AD
      */
-    InitializeAD();
-
+    InitializeADC();
+    
     turnOffAllLed();        // turn off all RGB LED
             
-    /* turn off the heating drive !!! */
-    Drive_Plates = OFF ;  
-    /* OK , it is safe now */
     
     /*  waiting for user to release the button to avoid startup system and then
      *  shutdown the system for a long push
@@ -88,29 +87,13 @@
     }
     Led_LowRed = OFF ;
     
-    /* Initialize the system clock*/
-    timeSystemRun = 0 ;
-    
-    /* Initialize the battery's capacitor value */
-    /* because of the average calculating need some time 
-     * So, here give the array a low battery capacitor value
-     */ 
-    for ( i = 0 ; i < AD_AVERAGE_NUMBER ; i++)
-    {
-     adcBatValue[i] = 816 ;      // 3.12V
-     adcAD597Value[i] = 0 ;     
-    }    
-    
-    /* Initialize the buttonPushTime */
-    buttonPushTimeStart = 0 ;
-    buttonPushTimeStop = 0 ; 
     
     /*-------Show battery capacitor-----------------------*/
     /* In 10 Second of startup, show the battery capacity */
     /* using can break it by push S2 button */
-    while(timeSystemRun < 10 * 100)    // Note: it is 0.01S=10mS  +1
+    while(systemRunCount < 10 * 100)    // Note: it is 0.01S=10mS  +1
     {
-        adcValue = GetAdcBatValue( AD_BAT_CHANNEL );
+        adcValue = GetBatteryValue();
 
         turnOffAllLed();   // clear the trail of history display
         if ( adcValue > 996)   // 4.01 V
@@ -160,36 +143,10 @@
                                 // initial it at 1 level
     }
     
-#ifdef Check_Battery_ability
-  
-    uint32 countHeatTime = 0 ;
-    // check the battery ability to heat bowl , how many times when every circle
-    // is about 15 second.
-    while(TRUE)
-    {
-             // heat for 15 second; 
-             countHeatTime = timeSystemRun ;   
-             Drive_Plates = ON ;
-             while ( (countHeatTime + 1500) > timeSystemRun )// 1500= 15S / 0.01
-             {
-                adcValue = GetAdcAD597Value( AD_AD597_CHANNEL  );
-             }  // end of while
-
-            //  stop for 15 second
-              countHeatTime = timeSystemRun ;   
-             Drive_Plates = OFF ;
-             while ( (countHeatTime + 1500) > timeSystemRun )// 1500= 15S / 0.01
-             {
-                adcValue = GetAdcAD597Value( AD_AD597_CHANNEL  );
-             }  // end of while
-    
-    }
-#endif   
-    
 #ifdef Check_Temp_AD597output    
     uint8 flagHeat = 0 ;
     uint8 count=0 ;
-    int16 Kp = 64 ; 
+    int16 Kp ; 
     int16 temp;
     while(1)
     {
@@ -209,7 +166,7 @@
         //                      185'C         1.42V
         //                      190'c         1.45V
         //                      210'C         1.5V
-        adcValue = GetAdcAD597Value( AD_AD597_CHANNEL  );
+        adcValue =  GetTemperatureValue();
         
          turnOffAllLed();        // turn off all RGB LED
         if ( adcValue > 630 )   // ( 0.92/2.5 ) * 1024 = 367
@@ -289,12 +246,12 @@
              // Dt =  573 - adcValue
             
              temp = 573- adcValue ;
-             temp = temp * 0.4 ;
-             Kp = 128 + temp;
+             temp = temp * 4.0 ;
+             Kp = temp ;
              
-             if ( Kp > 255 )
+             if ( Kp > 573 )
              {
-                 Kp = 255 ;
+                 Kp = 573 ;
              }
              
              temp= 0 ;
@@ -307,7 +264,7 @@
                 }
 
                 Drive_Plates = 0 ;
-                for( i=0; i< (256-Kp); i++ )
+                for( i=0; i< (573-Kp); i++ )
                 {
                  delay_10us();
                 }
@@ -393,7 +350,7 @@
         {
           flagChargeBat = 1;    
             // sure the USB has plugged in
-           adcValue = GetAdcChargBatValue( AD_BAT_OK_CHANNEL );
+           adcValue = GetBatteryChargeValue();
           if ( adcValue > 800 )
           {
               // it OK to charge the battery
@@ -403,7 +360,7 @@
 
           }else
           {
-              adcValue = GetAdcBatValue( AD_BAT_CHANNEL );
+              adcValue = GetBatteryValue();
 
                 turnOffAllLed();   // clear the trail of history display
                 if ( adcValue > 996)   // 4.01 V
@@ -474,7 +431,7 @@
   /*
     while(1)
     {
-        adcValue = GetAdcAD597Value( AD_AD597_CHANNEL  );
+        adcValue = GettemperatureValue;
         
          turnOffAllLed();        // turn off all RGB LED
         if ( adcValue >175 )
